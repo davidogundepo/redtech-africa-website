@@ -1,11 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Users, BookOpen, Shield, Settings, Search, Building, Briefcase, CheckCircle } from 'lucide-react';
+import { ArrowRight, Users, BookOpen, Shield, Settings, Search, Building, Briefcase } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 
 export default function ServicesPage() {
   const { isDark } = useTheme();
-  const navigate = useNavigate();
 
   const services = [
     {
@@ -31,7 +29,7 @@ export default function ServicesPage() {
     {
       icon: Shield,
       title: 'Capability Diagnostic',
-      desc: 'A structured organisational assessment with a prioritised roadmap in 10 working days.',
+      desc: 'For organisations that know something is not performing but are not sure what. A structured assessment with a priority roadmap delivered in 10 working days.',
     },
     {
       icon: Building,
@@ -82,9 +80,9 @@ export default function ServicesPage() {
             Behind every brief is a system. We find what is actually broken — then fix it properly.
           </p>
           <div className="flex flex-wrap gap-4">
-            <button onClick={() => navigate('/contact')} className="px-8 py-4 rounded-2xl bg-[#8e5e42] text-white font-bold text-lg hover:bg-[#8e5e42]/90 transition-all flex items-center gap-2">
-              Talk to Us <ArrowRight size={20} />
-            </button>
+            <a href="mailto:hello@redtechafrica.com?subject=Discovery Call Request" className="px-8 py-4 rounded-2xl bg-[#8e5e42] text-white font-bold text-lg hover:bg-[#8e5e42]/90 transition-all flex items-center gap-2">
+              Book a Discovery Call <ArrowRight size={20} />
+            </a>
           </div>
         </div>
       </section>
@@ -119,13 +117,13 @@ export default function ServicesPage() {
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((s, i) => (
-              <div key={i} onClick={() => navigate('/contact')} className={`cursor-pointer group p-6 rounded-2xl border transition-all hover:-translate-y-1 hover:shadow-lg ${
+              <a key={i} href="mailto:hello@redtechafrica.com?subject=Discovery Call Request" className={`group p-6 rounded-2xl border transition-all hover:-translate-y-1 hover:shadow-lg ${
                 isDark ? 'bg-gray-800/50 border-gray-700 hover:border-[#8e5e42]' : 'bg-white border-gray-200 hover:border-[#8e5e42]'
               }`}>
                 <s.icon className="text-[#8e5e42] mb-4" size={28} />
                 <h3 className={`text-lg font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{s.title}</h3>
                 <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{s.desc}</p>
-              </div>
+              </a>
             ))}
           </div>
         </div>
@@ -206,9 +204,9 @@ export default function ServicesPage() {
           <p className={`text-xl mb-10 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
             Tell us what is not working. We will tell you honestly whether we can fix it.
           </p>
-          <button onClick={() => navigate('/contact')} className="px-10 py-5 rounded-2xl bg-[#8e5e42] text-white font-bold text-xl hover:bg-[#8e5e42]/90 transition-all inline-flex items-center gap-3">
-            Get in Touch <ArrowRight size={22} />
-          </button>
+          <a href="mailto:hello@redtechafrica.com?subject=Discovery Call Request" className="px-10 py-5 rounded-2xl bg-[#8e5e42] text-white font-bold text-xl hover:bg-[#8e5e42]/90 transition-all inline-flex items-center gap-3">
+            Book a Discovery Call <ArrowRight size={22} />
+          </a>
         </div>
       </section>
     </div>

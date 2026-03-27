@@ -227,7 +227,7 @@ export default function AboutPage() {
                   <div className={`w-20 h-20 bg-[#8e5e42] rounded-2xl flex items-center justify-center mx-auto mb-4`}>
                     <Code size={32} className="text-white" />
                   </div>
-                  <h3 className={`text-xl font-bold mb-2 font-heading font-playfair ${isDark ? 'text-white' : 'text-gray-900'}`}>Technology</h3>
+                  <h3 className={`text-xl font-bold mb-2 font-heading font-playfair ${isDark ? 'text-white' : 'text-gray-900'}`}>Digital Technology</h3>
                   <p className={isDark ? 'text-gray-400' : 'text-gray-600'}>Strategic consulting and innovation delivery</p>
                 </div>
               </div>
@@ -318,7 +318,7 @@ export default function AboutPage() {
             }`}
           >
             <h2 className={`text-5xl font-black text-center mb-16 font-heading ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              Guided by Our Values
+              Our Values
             </h2>
             
             {/* Interactive Values Display */}

@@ -1,194 +1,353 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Users, Brain, Code } from 'lucide-react';
-import { useTheme } from '@/contexts/ThemeContext';
 
 export default function HomePage() {
-  const navigate = useNavigate();
-  const { isDark } = useTheme();
-
   return (
-    <div className={`min-h-screen transition-all duration-500 overflow-hidden ${
-      isDark 
-        ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white'
-        : 'bg-gradient-to-br from-gray-50 via-white to-[#8e5e42]/5 text-gray-900'
-    }`}>
-      {/* Animated Background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className={`absolute top-20 right-20 w-96 h-96 blur-3xl animate-pulse ${isDark ? 'bg-[#8e5e42]/10' : 'bg-[#8e5e42]/5'}`}></div>
-        <div className={`absolute bottom-20 left-20 w-80 h-80 blur-3xl animate-pulse delay-1000 ${isDark ? 'bg-[#8e5e42]/10' : 'bg-[#8e5e42]/5'}`}></div>
-      </div>
+    <div className="min-h-screen text-[#f0ede8]" style={{ backgroundColor: '#0a0a0a' }}>
 
-      {/* HERO */}
-      <section className={`relative min-h-screen flex items-center justify-center pt-20 ${
-        isDark 
-          ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-black'
-          : 'bg-gradient-to-br from-[#8e5e42]/5 via-white to-[#8e5e42]/10'
-      }`}>
-        <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
-          <div className="space-y-8">
-            <p className={`text-sm font-bold tracking-widest uppercase ${isDark ? 'text-[#8e5e42]' : 'text-[#8e5e42]'}`}>
-              REDtech Africa Consulting (RAC) — Lagos · London
-            </p>
+      {/* ── SECTION 1: HERO ── */}
+      <section
+        className="relative min-h-screen flex flex-col justify-center pt-24 pb-16 px-4 sm:px-6 lg:px-8"
+        style={{ backgroundColor: '#0a0a0a' }}
+      >
+        <div className="container max-w-5xl mx-auto z-10">
+          {/* Label */}
+          <p className="text-xs font-bold tracking-[0.25em] uppercase text-[#c8372d] mb-8">
+            REDtech Africa Consulting (RAC) — Lagos · London
+          </p>
 
-            <h1 className={`text-5xl md:text-7xl lg:text-8xl font-black leading-tight font-heading ${
-              isDark 
-                ? 'bg-gradient-to-r from-white via-[#8e5e42] to-[#8e5e42] bg-clip-text text-transparent'
-                : 'bg-gradient-to-r from-gray-900 via-[#8e5e42] to-[#8e5e42] bg-clip-text text-transparent'
-            }`}>
-              Closing the Gap Between Your Workforce and Your Ambition
-            </h1>
-            
-            <p className={`text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-              We help organisations build the people, systems, and digital capability they need to perform — through resourcing, education, and advisory.
-            </p>
+          {/* Main Headline */}
+          <h1
+            className="font-heading font-black leading-[1.05] mb-8"
+            style={{ fontSize: 'clamp(2.8rem, 6vw, 5.2rem)' }}
+          >
+            <span className="block text-[#f0ede8]">Closing the Gap Between</span>
+            <span className="block text-[#f0ede8]">the Workforce You Have</span>
+            <span className="block text-[#888888] italic" style={{ fontStyle: 'italic' }}>and the Results You Need.</span>
+          </h1>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
-              <button
-                onClick={() => navigate('/services')}
-                className="px-12 py-6 bg-[#8e5e42] rounded-2xl font-bold text-white text-xl hover:shadow-2xl hover:shadow-[#8e5e42]/25 transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 flex items-center justify-center gap-3"
-              >
-                Explore Our Services
-                <ArrowRight size={24} />
-              </button>
-              <button
-                onClick={() => navigate('/contact')}
-                className={`px-12 py-6 rounded-2xl font-bold text-xl border-2 border-[#8e5e42] transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 flex items-center justify-center gap-3 ${
-                  isDark 
-                    ? 'bg-transparent text-white hover:bg-[#8e5e42]/10'
-                    : 'bg-transparent text-gray-900 hover:bg-[#8e5e42]/10'
-                }`}
-              >
-                Get in Touch
-              </button>
-            </div>
+          {/* Sub-headline */}
+          <p className="text-lg md:text-xl text-[#c8c8c8] max-w-2xl leading-relaxed mb-12">
+            RAC closes that gap — through resourcing, education, and digital advisory built from 15+ years working inside HR, financial institutions, and technology organisations across Nigeria and the UK.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4">
+            <a
+              href="mailto:hello@redtechafrica.com?subject=Discovery Call Request"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#c8372d] text-white font-bold text-base rounded-xl hover:bg-[#a82a22] transition-all duration-300 hover:-translate-y-1"
+            >
+              Book a Discovery Call <ArrowRight size={18} />
+            </a>
+            <a
+              href="mailto:hello@redtechafrica.com?subject=Capability Diagnostic Request"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-[#f0ede8]/20 text-[#f0ede8] font-bold text-base rounded-xl hover:border-[#c8372d]/60 hover:bg-[#c8372d]/10 transition-all duration-300 hover:-translate-y-1"
+            >
+              Request a Capability Diagnostic
+            </a>
           </div>
         </div>
-      </section>
 
-      {/* R · E · D PILLARS */}
-      <section className="py-24 relative">
-        <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className={`text-4xl md:text-5xl font-black mb-4 font-heading ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              Resourcing · Education · Digital
-            </h2>
-            <p className={`text-xl max-w-2xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              Three connected arms. One goal: closing the gap between where your organisation is and where it needs to be.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 mb-20">
+        {/* Stats strip */}
+        <div
+          className="container max-w-5xl mx-auto mt-20 pt-8 border-t border-[#f0ede8]/10"
+        >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { icon: Users, letter: 'R', title: 'Resourcing', desc: 'Evidence-based hiring and workforce infrastructure. From emerging talent to executive roles.' },
-              { icon: Brain, letter: 'E', title: 'Education', desc: 'Bespoke training that builds real capability. Delivered by practitioners. Embedded to last.' },
-              { icon: Code, letter: 'D', title: 'Digital Advisory', desc: '15+ years of AI and cybersecurity expertise deployed into African enterprise contexts.' },
-            ].map((pillar, i) => (
-              <div 
-                key={i}
-                onClick={() => navigate('/services')}
-                className={`cursor-pointer group p-8 rounded-3xl border transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 relative overflow-hidden ${
-                  isDark 
-                    ? 'bg-gradient-to-br from-gray-800/80 to-gray-900/80 border-[#8e5e42]/20 hover:border-[#8e5e42]/50'
-                    : 'bg-gradient-to-br from-white/80 to-[#8e5e42]/5 border-[#8e5e42]/20 hover:border-[#8e5e42]/50'
-                }`}
-              >
-                <div className="absolute top-0 left-0 right-0 h-1 bg-[#8e5e42] transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500"></div>
-                <div className="flex items-center gap-4 mb-6">
-                  <span className="text-4xl font-black text-[#8e5e42] font-heading">{pillar.letter}</span>
-                  <div className="w-14 h-14 bg-[#8e5e42] rounded-2xl flex items-center justify-center">
-                    <pillar.icon size={28} className="text-white" />
-                  </div>
-                </div>
-                <h3 className={`text-2xl font-black mb-3 font-heading ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                  {pillar.title}
-                </h3>
-                <p className={`leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                  {pillar.desc}
-                </p>
+              { num: '27K+', label: 'Community Members' },
+              { num: '7', label: 'Self-funded Hackathons' },
+              { num: '15+', label: 'Years of Experience' },
+              { num: '2018', label: 'Founded' },
+            ].map((stat, i) => (
+              <div key={i} className="text-center md:text-left">
+                <div className="text-3xl md:text-4xl font-black text-[#c8372d] font-heading">{stat.num}</div>
+                <div className="text-sm text-[#888888] mt-1">{stat.label}</div>
               </div>
             ))}
           </div>
+        </div>
 
-          {/* STATS */}
-          <div className={`backdrop-blur-sm rounded-3xl p-12 border ${
-            isDark 
-              ? 'bg-gradient-to-br from-[#8e5e42]/20 to-gray-800/80 border-[#8e5e42]/30'
-              : 'bg-gradient-to-br from-[#8e5e42]/10 to-white/80 border-[#8e5e42]/30'
-          }`}>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              {[
-                { num: '27K+', label: 'Community Members' },
-                { num: '7', label: 'Self-funded Hackathons' },
-                { num: '15+', label: 'Years of Experience' },
-                { num: '2', label: 'Continents' },
-              ].map((stat, i) => (
-                <div key={i}>
-                  <div className="text-4xl md:text-5xl font-black mb-2 text-[#8e5e42]">{stat.num}</div>
-                  <div className={`font-medium text-sm md:text-base ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>{stat.label}</div>
+        {/* Origin quote */}
+        <div className="container max-w-5xl mx-auto mt-8">
+          <p className="text-sm text-[#888888] italic border-l-2 border-[#c8372d] pl-4">
+            Built from 15+ years working inside HR, financial institutions, and technology organisations across Nigeria and the UK.
+          </p>
+        </div>
+      </section>
+
+      {/* ── SECTION 2: R · E · D NAME STRIP ── */}
+      <section style={{ backgroundColor: '#111111' }} className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="container max-w-5xl mx-auto">
+          <p className="text-xs font-bold tracking-[0.25em] uppercase text-[#c8372d] mb-10">What RAC Stands For</p>
+
+          <div className="grid md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-[#f0ede8]/10">
+            {[
+              {
+                letter: 'R',
+                title: 'Resourcing',
+                desc: 'Evidence-based hiring and workforce infrastructure. From emerging talent to executive roles — we build the system, not just fill the seat.',
+              },
+              {
+                letter: 'E',
+                title: 'Education',
+                desc: 'Bespoke training that builds real capability. Delivered by practitioners with context. Embedded to last after we leave.',
+              },
+              {
+                letter: 'D',
+                title: 'Digital Technology',
+                desc: '15+ years of technology expertise deployed into African enterprise contexts. Strategy, AI literacy, and digital advisory.',
+              },
+            ].map((arm, i) => (
+              <div key={i} className="py-8 md:py-0 md:px-10 first:md:pl-0 last:md:pr-0">
+                <div className="flex items-baseline gap-4 mb-4">
+                  <span className="text-6xl font-black text-[#c8372d] font-heading leading-none">{arm.letter}</span>
+                  <span className="text-xl font-bold text-[#f0ede8]">{arm.title}</span>
                 </div>
-              ))}
-            </div>
+                <p className="text-[#888888] text-sm leading-relaxed">{arm.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* THE PROBLEM */}
-      <section className={`py-24 ${isDark ? 'bg-black' : 'bg-gray-50'}`}>
-        <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className={`text-4xl md:text-5xl font-black mb-4 font-heading ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              Two Sides. Same Broken System.
-            </h2>
-            <p className={`text-xl max-w-2xl mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              This is not a talent problem or an employer problem. It is an infrastructure problem — and infrastructure can be rebuilt.
-            </p>
-          </div>
+      {/* ── SECTION 3: THE GAP ── */}
+      <section style={{ backgroundColor: '#161616' }} className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="container max-w-5xl mx-auto">
+          <p className="text-xs font-bold tracking-[0.25em] uppercase text-[#c8372d] mb-4">The Problem</p>
+          <h2 className="text-3xl md:text-4xl font-black text-[#f0ede8] font-heading mb-4">
+            Two Sides of the Same Broken System.
+          </h2>
+          <p className="text-[#888888] text-lg mb-12 max-w-2xl">
+            This is not a talent problem or an employer problem. It is an infrastructure problem — and infrastructure can be rebuilt.
+          </p>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            <div className={`p-8 rounded-3xl border ${isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'}`}>
-              <h3 className={`text-xl font-bold mb-4 pb-4 border-b ${isDark ? 'border-gray-800 text-white' : 'border-gray-200 text-gray-900'}`}>Organisations say:</h3>
-              <p className="text-[#8e5e42] font-bold text-lg mb-4">"We can't find people who can actually do the work."</p>
-              <ul className={`space-y-2 text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                {['CV screening is expensive and inaccurate', 'Training budgets spent, same problems remain', 'AI tools deployed, nobody knows how to use them', 'Best people leaving for growth they can\'t find'].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2"><span className="text-[#8e5e42] mt-0.5">•</span>{item}</li>
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            {/* Organisations */}
+            <div className="p-8 rounded-2xl border border-[#f0ede8]/10" style={{ backgroundColor: '#1c1c1c' }}>
+              <h3 className="text-sm font-bold tracking-widest uppercase text-[#888888] mb-4 pb-4 border-b border-[#f0ede8]/10">
+                Organisations Say
+              </h3>
+              <p className="text-[#c8372d] font-bold text-base mb-4">"We can't find people who can actually do the work."</p>
+              <ul className="space-y-2 text-sm text-[#888888]">
+                {[
+                  'CV screening is expensive and inaccurate',
+                  'Training budgets spent, same problems remain',
+                  'AI tools deployed, nobody knows how to use them',
+                  'Best people leaving for growth they can\'t find here',
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <span className="text-[#c8372d] mt-0.5">—</span>
+                    {item}
+                  </li>
                 ))}
               </ul>
             </div>
-            <div className={`p-8 rounded-3xl border ${isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'}`}>
-              <h3 className={`text-xl font-bold mb-4 pb-4 border-b ${isDark ? 'border-gray-800 text-white' : 'border-gray-200 text-gray-900'}`}>Talent says:</h3>
-              <p className="text-[#8e5e42] font-bold text-lg mb-4">"Can't get experience without a job. Can't get a job without experience."</p>
-              <ul className={`space-y-2 text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                {['No verifiable experience to show', 'No structured path from learning to earning', 'Invisible beyond a generic CV', 'No way to prove capability employers trust'].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2"><span className="text-[#8e5e42] mt-0.5">•</span>{item}</li>
+
+            {/* Talent */}
+            <div className="p-8 rounded-2xl border border-[#f0ede8]/10" style={{ backgroundColor: '#1c1c1c' }}>
+              <h3 className="text-sm font-bold tracking-widest uppercase text-[#888888] mb-4 pb-4 border-b border-[#f0ede8]/10">
+                Talent Says
+              </h3>
+              <p className="text-[#c8372d] font-bold text-base mb-4">"Can't get experience without a job. Can't get a job without experience."</p>
+              <ul className="space-y-2 text-sm text-[#888888]">
+                {[
+                  'No verifiable experience to show',
+                  'No structured path from learning to earning',
+                  'Invisible beyond a generic CV',
+                  'No way to prove capability employers trust',
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <span className="text-[#c8372d] mt-0.5">—</span>
+                    {item}
+                  </li>
                 ))}
               </ul>
             </div>
           </div>
 
-          <div className={`p-8 rounded-3xl border-l-4 border-l-[#8e5e42] ${isDark ? 'bg-gray-900/80 border-y border-r border-gray-800' : 'bg-[#8e5e42]/5 border-y border-r border-[#8e5e42]/20'}`}>
-            <p className={`text-lg font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>
+          {/* Closing statement */}
+          <div className="border-l-4 border-[#c8372d] pl-6 py-2">
+            <p className="text-[#c8c8c8] text-base leading-relaxed">
               RAC builds the infrastructure that closes both sides — through evidence-based talent matching, bespoke capability training, and digital advisory.
             </p>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-24 text-center relative">
-        <div className="container max-w-3xl mx-auto px-4 z-10 relative">
-          <h2 className={`text-4xl md:text-5xl font-black mb-6 font-heading ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            Let's talk about what's not working.
+      {/* ── SECTION 4: THREE CONNECTED ARMS ── */}
+      <section style={{ backgroundColor: '#111111' }} className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="container max-w-5xl mx-auto">
+          <p className="text-xs font-bold tracking-[0.25em] uppercase text-[#c8372d] mb-4">What We Build</p>
+          <h2 className="text-3xl md:text-4xl font-black text-[#f0ede8] font-heading mb-4">
+            Three Connected Arms
           </h2>
-          <p className={`text-xl mb-10 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            No jargon. No pitch deck. Just a straight conversation about whether we can help.
+          <p className="text-[#888888] text-lg mb-12 max-w-2xl">
+            Each works independently. Together, they close the gap between where your organisation is and where it needs to be.
           </p>
-          <button
-            onClick={() => navigate('/contact')}
-            className="px-12 py-6 bg-[#8e5e42] rounded-2xl font-bold text-white text-xl hover:shadow-2xl hover:shadow-[#8e5e42]/25 transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 inline-flex items-center gap-3"
-          >
-            Contact Us <ArrowRight size={24} />
-          </button>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                letter: 'R',
+                title: 'Resourcing',
+                desc: 'Evidence-based hiring and workforce infrastructure. From emerging talent to executive roles.',
+                link: '/services',
+              },
+              {
+                letter: 'E',
+                title: 'Education',
+                desc: 'Bespoke training that builds real capability. Delivered by practitioners. Embedded to last.',
+                link: '/services',
+              },
+              {
+                letter: 'D',
+                title: 'Digital Technology',
+                desc: '15+ years of AI and cybersecurity expertise deployed into African enterprise contexts.',
+                link: '/services',
+              },
+            ].map((pillar, i) => (
+              <a
+                key={i}
+                href={pillar.link}
+                className="group p-8 rounded-2xl border border-[#f0ede8]/10 hover:border-[#c8372d]/40 transition-all duration-300 hover:-translate-y-1"
+                style={{ backgroundColor: '#161616' }}
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="text-5xl font-black text-[#c8372d] font-heading leading-none">{pillar.letter}</span>
+                </div>
+                <h3 className="text-lg font-bold text-[#f0ede8] mb-3">{pillar.title}</h3>
+                <p className="text-[#888888] text-sm leading-relaxed">{pillar.desc}</p>
+                <div className="mt-6 flex items-center gap-2 text-[#c8372d] text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  Learn more <ArrowRight size={14} />
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION 5: LEGUP ── */}
+      <section style={{ backgroundColor: '#1c1c1c' }} className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="container max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+              <p className="text-xs font-bold tracking-[0.25em] uppercase text-[#c8372d] mb-4">Platform</p>
+              <h2 className="text-3xl md:text-4xl font-black text-[#f0ede8] font-heading mb-6">
+                LegUp — We built what we needed and couldn't find.
+              </h2>
+              <p className="text-[#c8c8c8] text-base leading-relaxed mb-6">
+                LegUp is a portfolio-first talent platform that lets people show what they can actually do — and lets employers see it directly. No more guessing from CVs.
+              </p>
+              <p className="text-[#888888] text-sm leading-relaxed mb-8">
+                Built for African talent. Trusted by employers who are done with the old way.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <a
+                  href="mailto:hello@redtechafrica.com?subject=LegUp - Employer Enquiry"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#c8372d] text-white font-bold text-sm rounded-xl hover:bg-[#a82a22] transition-all duration-300 hover:-translate-y-1"
+                >
+                  I'm an Employer <ArrowRight size={16} />
+                </a>
+                <a
+                  href="mailto:hello@redtechafrica.com?subject=LegUp - Talent Enquiry"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-[#f0ede8]/20 text-[#f0ede8] font-bold text-sm rounded-xl hover:border-[#c8372d]/60 hover:bg-[#c8372d]/10 transition-all duration-300 hover:-translate-y-1"
+                >
+                  I'm Looking for Opportunities
+                </a>
+              </div>
+            </div>
+            <div className="hidden md:block">
+              <div className="aspect-square rounded-2xl border border-[#f0ede8]/10 flex items-center justify-center" style={{ backgroundColor: '#161616' }}>
+                <div className="text-center p-12">
+                  <div className="text-7xl font-black text-[#c8372d] font-heading mb-4">L</div>
+                  <div className="text-2xl font-bold text-[#f0ede8] mb-2">LegUp</div>
+                  <div className="text-[#888888] text-sm">Portfolio-first talent platform</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION 6: THE NUMBERS ── */}
+      <section style={{ backgroundColor: '#111111' }} className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="container max-w-5xl mx-auto">
+          <p className="text-xs font-bold tracking-[0.25em] uppercase text-[#c8372d] mb-10">By the Numbers</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { num: '27K+', label: 'Community Members' },
+              { num: '7', label: 'Self-funded Hackathons' },
+              { num: '15+', label: 'Years of Experience' },
+              { num: '2018', label: 'Year Founded' },
+            ].map((stat, i) => (
+              <div key={i} className="border-t border-[#c8372d]/40 pt-6">
+                <div className="text-4xl md:text-5xl font-black text-[#f0ede8] font-heading mb-2">{stat.num}</div>
+                <div className="text-sm text-[#888888]">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION 7: START HERE ── */}
+      <section style={{ backgroundColor: '#0a0a0a' }} className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="container max-w-5xl mx-auto">
+          <p className="text-xs font-bold tracking-[0.25em] uppercase text-[#c8372d] mb-4">Start Here</p>
+          <h2 className="text-3xl md:text-4xl font-black text-[#f0ede8] font-heading mb-4">
+            Where would you like to begin?
+          </h2>
+          <p className="text-[#888888] text-lg mb-12">
+            Four routes in. All roads lead to closing the gap.
+          </p>
+
+          <div className="grid sm:grid-cols-2 gap-4">
+            {[
+              {
+                tag: 'For Organisations',
+                title: 'Book a Discovery Call',
+                desc: 'No pitch deck. No jargon. A straight conversation about whether we can help — and how.',
+                cta: 'Book a Call',
+                href: 'mailto:hello@redtechafrica.com?subject=Discovery Call Request',
+              },
+              {
+                tag: 'For Organisations',
+                title: 'Request a Capability Diagnostic',
+                desc: 'For organisations that know something is not performing but are not sure what. A structured assessment with a priority roadmap delivered in 10 working days.',
+                cta: 'Request Diagnostic',
+                href: 'mailto:hello@redtechafrica.com?subject=Capability Diagnostic Request',
+              },
+              {
+                tag: 'For Talent',
+                title: 'Join LegUp Waitlist',
+                desc: 'Build your verifiable portfolio. Get matched to employers who judge on capability, not CV.',
+                cta: 'Join LegUp',
+                href: 'mailto:hello@redtechafrica.com?subject=LegUp - Join Waitlist',
+              },
+              {
+                tag: 'For Everyone',
+                title: 'Explore a Partnership',
+                desc: 'Institutions, investors, and strategic partners — let\'s talk about ecosystem-level collaboration.',
+                cta: 'Explore Partnership',
+                href: 'mailto:hello@redtechafrica.com?subject=Partnership Enquiry',
+              },
+            ].map((card, i) => (
+              <div
+                key={i}
+                className="p-8 rounded-2xl border border-[#f0ede8]/10 hover:border-[#c8372d]/40 transition-all duration-300 group"
+                style={{ backgroundColor: '#161616' }}
+              >
+                <p className="text-xs font-bold tracking-widest uppercase text-[#c8372d] mb-3">{card.tag}</p>
+                <h3 className="text-xl font-bold text-[#f0ede8] mb-3">{card.title}</h3>
+                <p className="text-[#888888] text-sm leading-relaxed mb-6">{card.desc}</p>
+                <a
+                  href={card.href}
+                  className="inline-flex items-center gap-2 text-sm font-bold text-[#c8372d] hover:text-[#f0ede8] transition-colors duration-200"
+                >
+                  {card.cta} <ArrowRight size={14} />
+                </a>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>
