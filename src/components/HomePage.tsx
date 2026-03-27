@@ -32,7 +32,7 @@ export default function HomePage() {
         <div className="container max-w-5xl mx-auto z-10">
 
           {/* Label */}
-          <p className="text-xs font-bold tracking-[0.25em] uppercase text-[#8e5e42] mb-8">
+          <p className="text-xs font-bold tracking-[0.15em] sm:tracking-[0.25em] uppercase text-[#8e5e42] mb-8 leading-relaxed">
             REDtech Africa Consulting (RAC) — Lagos · London
           </p>
 
@@ -104,7 +104,7 @@ export default function HomePage() {
         <div className="container max-w-5xl mx-auto">
           <p className="text-xs font-bold tracking-[0.25em] uppercase text-[#8e5e42] mb-10">What RAC Stands For</p>
 
-          <div className="grid md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-[#8e5e42]/20">
+          <div className="grid md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-[#8e5e42]/20 -mx-4 sm:mx-0 px-4 sm:px-0">
             {[
               {
                 letter: 'R',
