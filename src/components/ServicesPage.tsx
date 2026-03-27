@@ -66,21 +66,34 @@ export default function ServicesPage() {
   ];
 
   return (
-    <div className={`min-h-screen transition-all duration-500 ${
-      isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'
+    <div className={`min-h-screen transition-all duration-500 overflow-hidden ${
+      isDark
+        ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white'
+        : 'bg-gradient-to-br from-gray-50 via-white to-[#8e5e42]/5 text-gray-900'
     }`}>
 
+      {/* Animated Background Blobs */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className={`absolute top-20 right-20 w-96 h-96 blur-3xl animate-pulse ${isDark ? 'bg-[#8e5e42]/10' : 'bg-[#8e5e42]/5'}`} />
+        <div className={`absolute bottom-40 left-20 w-80 h-80 blur-3xl animate-pulse delay-1000 ${isDark ? 'bg-[#8e5e42]/10' : 'bg-[#8e5e42]/5'}`} />
+      </div>
+
       {/* HERO */}
-      <section className={`pt-32 pb-20 px-4 sm:px-6 lg:px-8 ${isDark ? 'bg-black' : 'bg-[#8e5e42]/5'}`}>
-        <div className="container max-w-5xl mx-auto">
+      <section className={`pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative ${
+        isDark
+          ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-black'
+          : 'bg-gradient-to-br from-[#8e5e42]/5 via-white to-[#8e5e42]/10'
+      }`}>
+        <div className="container max-w-5xl mx-auto relative z-10">
+          <p className="text-xs font-bold tracking-[0.25em] uppercase text-[#8e5e42] mb-6">Our Services</p>
           <h1 className={`text-5xl md:text-7xl font-black leading-tight mb-6 font-heading ${isDark ? 'text-white' : 'text-gray-900'}`}>
             The Brief Is Rarely<br />The Whole <span className="text-[#8e5e42]">Problem.</span>
           </h1>
-          <p className={`text-xl max-w-2xl mb-10 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+          <p className={`text-xl max-w-2xl mb-10 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
             Behind every brief is a system. We find what is actually broken — then fix it properly.
           </p>
           <div className="flex flex-wrap gap-4">
-            <a href="mailto:hello@redtechafrica.com?subject=Discovery Call Request" className="px-8 py-4 rounded-2xl bg-[#8e5e42] text-white font-bold text-lg hover:bg-[#8e5e42]/90 transition-all flex items-center gap-2">
+            <a href="mailto:hello@redtechafrica.com?subject=Discovery Call Request" className="px-8 py-4 rounded-2xl bg-[#8e5e42] text-white font-bold text-lg hover:bg-[#8e5e42]/90 hover:shadow-xl hover:shadow-[#8e5e42]/25 transition-all duration-300 hover:-translate-y-1 flex items-center gap-2">
               Book a Discovery Call <ArrowRight size={20} />
             </a>
           </div>
@@ -88,9 +101,9 @@ export default function ServicesPage() {
       </section>
 
       {/* ORIGIN STRIP */}
-      <section className={`py-10 border-y ${isDark ? 'border-gray-800' : 'border-gray-200'}`}>
+      <section className={`py-10 border-y ${isDark ? 'border-[#8e5e42]/20' : 'border-[#8e5e42]/20'}`}>
         <div className="container max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-6 items-start">
-          <div className="w-1 bg-[#8e5e42] rounded-full self-stretch hidden md:block"></div>
+          <div className="w-1 bg-[#8e5e42] rounded-full self-stretch hidden md:block" />
           <p className={`text-lg ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
             <strong>15+ years</strong> working inside HR, financial institutions, and technology organisations across Nigeria and the UK.
           </p>
@@ -98,7 +111,7 @@ export default function ServicesPage() {
       </section>
 
       {/* SECTORS */}
-      <section className={`py-6 overflow-x-auto ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      <section className={`py-6 overflow-x-auto`}>
         <div className="container max-w-7xl mx-auto px-4 flex items-center justify-center gap-4 md:gap-8 min-w-max">
           {['Financial Services', 'Development Finance', 'Public Sector', 'Oil & Gas', 'Higher Education', 'SMEs', 'NGOs', 'Technology'].map((s, i) => (
             <span key={i} className={`text-xs md:text-sm font-bold uppercase tracking-wider ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>{s}</span>
@@ -107,8 +120,8 @@ export default function ServicesPage() {
       </section>
 
       {/* 7 SERVICES */}
-      <section className="py-20">
-        <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="container max-w-7xl mx-auto">
           <h2 className={`text-3xl md:text-4xl font-black mb-4 font-heading ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Seven Services. One System.
           </h2>
@@ -117,12 +130,15 @@ export default function ServicesPage() {
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((s, i) => (
-              <a key={i} href="mailto:hello@redtechafrica.com?subject=Discovery Call Request" className={`group p-6 rounded-2xl border transition-all hover:-translate-y-1 hover:shadow-lg ${
-                isDark ? 'bg-gray-800/50 border-gray-700 hover:border-[#8e5e42]' : 'bg-white border-gray-200 hover:border-[#8e5e42]'
+              <a key={i} href="mailto:hello@redtechafrica.com?subject=Discovery Call Request" className={`group p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl relative overflow-hidden ${
+                isDark
+                  ? 'bg-gradient-to-br from-gray-800/80 to-gray-900/80 border-[#8e5e42]/20 hover:border-[#8e5e42]/50'
+                  : 'bg-gradient-to-br from-white/80 to-[#8e5e42]/5 border-[#8e5e42]/20 hover:border-[#8e5e42]/50'
               }`}>
+                <div className="absolute top-0 left-0 right-0 h-1 bg-[#8e5e42] transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500" />
                 <s.icon className="text-[#8e5e42] mb-4" size={28} />
                 <h3 className={`text-lg font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{s.title}</h3>
-                <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{s.desc}</p>
+                <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{s.desc}</p>
               </a>
             ))}
           </div>
@@ -130,8 +146,8 @@ export default function ServicesPage() {
       </section>
 
       {/* D³ APPROACH */}
-      <section className={`py-20 ${isDark ? 'bg-black' : 'bg-[#8e5e42]/5'}`}>
-        <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className={`py-20 px-4 sm:px-6 lg:px-8 ${isDark ? 'bg-gradient-to-br from-gray-900 to-gray-800' : 'bg-[#8e5e42]/5'}`}>
+        <div className="container max-w-6xl mx-auto">
           <p className="text-[#8e5e42] font-bold tracking-widest uppercase text-sm mb-3">Our Approach — D³</p>
           <h2 className={`text-3xl md:text-4xl font-black mb-4 font-heading ${isDark ? 'text-white' : 'text-gray-900'}`}>
             We define the problem<br />before we design the solution.
@@ -141,7 +157,11 @@ export default function ServicesPage() {
           </p>
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
             {d3Steps.map((step, i) => (
-              <div key={i} className={`p-6 rounded-2xl border ${isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'}`}>
+              <div key={i} className={`p-6 rounded-2xl border transition-all hover:-translate-y-1 hover:border-[#8e5e42]/50 ${
+                isDark
+                  ? 'bg-gradient-to-br from-gray-800/80 to-gray-900/80 border-[#8e5e42]/20'
+                  : 'bg-gradient-to-br from-white/80 to-[#8e5e42]/5 border-[#8e5e42]/20'
+              }`}>
                 <span className="text-[#8e5e42] font-bold text-sm">{step.num}</span>
                 <h4 className={`text-xl font-bold mt-2 mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>{step.title}</h4>
                 <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{step.desc}</p>
@@ -152,8 +172,8 @@ export default function ServicesPage() {
       </section>
 
       {/* 5 LEVELS */}
-      <section className="py-20">
-        <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="container max-w-6xl mx-auto">
           <h2 className={`text-3xl md:text-4xl font-black mb-4 font-heading ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Right capability. Right level.
           </h2>
@@ -162,8 +182,10 @@ export default function ServicesPage() {
           </p>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {levels.map((l, i) => (
-              <div key={i} className={`p-5 rounded-2xl border text-center transition-all hover:border-[#8e5e42] ${
-                isDark ? 'bg-gray-800/40 border-gray-700' : 'bg-white border-gray-200'
+              <div key={i} className={`p-5 rounded-2xl border text-center transition-all hover:-translate-y-1 hover:border-[#8e5e42]/50 ${
+                isDark
+                  ? 'bg-gradient-to-br from-gray-800/80 to-gray-900/80 border-[#8e5e42]/20'
+                  : 'bg-gradient-to-br from-white/80 to-[#8e5e42]/5 border-[#8e5e42]/20'
               }`}>
                 <span className="text-[#8e5e42] font-bold text-xs tracking-widest">LEVEL {i + 1}</span>
                 <h4 className={`font-bold mt-2 mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>{l.name}</h4>
@@ -175,8 +197,8 @@ export default function ServicesPage() {
       </section>
 
       {/* FLAGSHIP PACKS */}
-      <section className={`py-20 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
-        <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className={`py-20 px-4 sm:px-6 lg:px-8 ${isDark ? 'bg-gradient-to-br from-gray-900 to-gray-800' : 'bg-gray-50'}`}>
+        <div className="container max-w-6xl mx-auto">
           <h2 className={`text-3xl md:text-4xl font-black mb-4 font-heading ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Ready-to-deploy programmes.
           </h2>
@@ -185,7 +207,11 @@ export default function ServicesPage() {
           </p>
           <div className="grid sm:grid-cols-2 gap-6">
             {packs.map((p, i) => (
-              <div key={i} className={`p-6 rounded-2xl border ${isDark ? 'bg-black border-gray-800' : 'bg-white border-gray-200'}`}>
+              <div key={i} className={`p-6 rounded-2xl border transition-all hover:-translate-y-1 hover:border-[#8e5e42]/50 ${
+                isDark
+                  ? 'bg-gradient-to-br from-gray-800/80 to-gray-900/80 border-[#8e5e42]/20'
+                  : 'bg-gradient-to-br from-white/80 to-[#8e5e42]/5 border-[#8e5e42]/20'
+              }`}>
                 <span className="text-[#8e5e42] font-bold text-xs tracking-widest">PACK {i + 1}</span>
                 <h3 className={`text-xl font-bold mt-2 mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{p.name}</h3>
                 <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{p.desc}</p>
@@ -196,15 +222,15 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 text-center">
-        <div className="container max-w-3xl mx-auto px-4">
+      <section className="py-24 text-center px-4 sm:px-6 lg:px-8">
+        <div className="container max-w-3xl mx-auto">
           <h2 className={`text-4xl md:text-5xl font-black mb-6 font-heading ${isDark ? 'text-white' : 'text-gray-900'}`}>
             Ready to close the gap?
           </h2>
           <p className={`text-xl mb-10 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
             Tell us what is not working. We will tell you honestly whether we can fix it.
           </p>
-          <a href="mailto:hello@redtechafrica.com?subject=Discovery Call Request" className="px-10 py-5 rounded-2xl bg-[#8e5e42] text-white font-bold text-xl hover:bg-[#8e5e42]/90 transition-all inline-flex items-center gap-3">
+          <a href="mailto:hello@redtechafrica.com?subject=Discovery Call Request" className="px-10 py-5 rounded-2xl bg-[#8e5e42] text-white font-bold text-xl hover:bg-[#8e5e42]/90 hover:shadow-2xl hover:shadow-[#8e5e42]/25 transition-all duration-300 hover:-translate-y-1 inline-flex items-center gap-3">
             Book a Discovery Call <ArrowRight size={22} />
           </a>
         </div>
