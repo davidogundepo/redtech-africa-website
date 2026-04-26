@@ -165,46 +165,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── SECTION 4: THREE CONNECTED ARMS ── */}
-      <section className={`py-20 px-4 sm:px-6 lg:px-8 ${isDark ? 'bg-black' : 'bg-[#8e5e42]/5'}`}>
-        <div className="container max-w-5xl mx-auto">
-          <p className="text-xs font-bold tracking-[0.25em] uppercase text-[#8e5e42] mb-4">What We Build</p>
-          <h2 className={`text-3xl md:text-4xl font-black font-heading mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            Three Connected Arms
-          </h2>
-          <p className={`text-lg mb-12 max-w-2xl ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            Each works independently. Together, they close the gap.
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { letter: 'R', title: 'Resourcing', desc: 'Evidence-based hiring and workforce infrastructure. From emerging talent to executive roles.' },
-              { letter: 'E', title: 'Education', desc: 'Bespoke training that builds real capability. Delivered by practitioners. Embedded to last.' },
-              { letter: 'D', title: 'Digital Technology', desc: '15+ years of AI and cybersecurity expertise deployed into African enterprise contexts.' },
-            ].map((pillar, i) => (
-              <a
-                key={i}
-                href="/services"
-                className={`group p-8 rounded-3xl border transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 relative overflow-hidden ${
-                  isDark
-                    ? 'bg-gradient-to-br from-gray-800/80 to-gray-900/80 border-[#8e5e42]/20 hover:border-[#8e5e42]/50'
-                    : 'bg-gradient-to-br from-white/80 to-[#8e5e42]/5 border-[#8e5e42]/20 hover:border-[#8e5e42]/50'
-                }`}
-              >
-                <div className="absolute top-0 left-0 right-0 h-1 bg-[#8e5e42] transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500" />
-                <div className="flex items-center gap-4 mb-6">
-                  <span className="text-5xl font-black text-[#8e5e42] font-heading leading-none">{pillar.letter}</span>
-                </div>
-                <h3 className={`text-xl font-bold mb-3 font-heading ${isDark ? 'text-white' : 'text-gray-900'}`}>{pillar.title}</h3>
-                <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>{pillar.desc}</p>
-                <div className="mt-6 flex items-center gap-2 text-[#8e5e42] text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Learn more <ArrowRight size={14} />
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ── SECTION 5: LEGUP ── */}
       <section className="py-24 px-4 sm:px-6 lg:px-8">
