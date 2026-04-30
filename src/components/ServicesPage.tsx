@@ -164,13 +164,13 @@ export default function ServicesPage() {
             alt="Team meeting"
             className="w-full h-full object-cover"
           />
-          <div className={`absolute inset-0 ${isDark ? 'bg-gray-900/92' : 'bg-white/97'}`} />
+          <div className="absolute inset-0 bg-gray-900/85" />
         </div>
         <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <h2 className={`text-5xl md:text-6xl font-black mb-8 font-heading ${isDark ? 'text-white' : 'text-gray-900'}`}>
+          <h2 className="text-5xl md:text-6xl font-black mb-8 font-heading text-white">
             Close the Gap Between Potential and Performance.
           </h2>
-          <p className={`text-xl mb-12 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+          <p className="text-xl mb-12 leading-relaxed text-gray-300">
             We help organisations diagnose capability gaps, verify real skills, and connect talent to opportunity through a system built for results.
           </p>
           <a href="/contact" className="inline-flex items-center justify-center gap-3 px-12 py-5 bg-[#8e5e42] text-white font-bold text-xl rounded-2xl hover:bg-[#8e5e42]/90 hover:shadow-2xl hover:shadow-[#8e5e42]/30 transition-all duration-300 hover:-translate-y-1">

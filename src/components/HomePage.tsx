@@ -339,13 +339,13 @@ export default function HomePage() {
             alt="Modern workspace"
             className="w-full h-full object-cover"
           />
-          <div className={`absolute inset-0 ${isDark ? 'bg-gray-900/90' : 'bg-white/97'}`} />
+          <div className="absolute inset-0 bg-gray-900/85" />
         </div>
         <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <h2 className={`text-5xl md:text-6xl font-black font-heading mb-8 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+          <h2 className="text-5xl md:text-6xl font-black font-heading mb-8 text-white">
             Ready to Close the Capability Gap?
           </h2>
-          <p className={`text-xl leading-relaxed mb-12 max-w-3xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+          <p className="text-xl leading-relaxed mb-12 max-w-3xl mx-auto text-gray-300">
             Whether you need the right people, programmes that build real skills, or digital advisory that sticks — RAC brings the practitioner experience to make it happen.
           </p>
           <div className="flex flex-col sm:flex-row gap-5 justify-center">
@@ -357,9 +357,7 @@ export default function HomePage() {
             </a>
             <a
               href="/services"
-              className={`inline-flex items-center justify-center gap-3 px-10 py-5 border-2 border-[#8e5e42] font-bold text-lg rounded-2xl transition-all duration-300 hover:-translate-y-1 ${
-                isDark ? 'text-white hover:bg-[#8e5e42]/10' : 'text-gray-900 hover:bg-[#8e5e42]/10'
-              }`}
+              className="inline-flex items-center justify-center gap-3 px-10 py-5 border-2 border-white/40 text-white font-bold text-lg rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/10"
             >
               See How We Work
             </a>
