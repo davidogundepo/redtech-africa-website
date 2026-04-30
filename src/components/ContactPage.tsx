@@ -1,406 +1,283 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowRight, MapPin, Phone, Mail, Loader2 } from "lucide-react";
-import { useTheme } from "@/contexts/ThemeContext";
-import LocationMap from "@/components/LocationMap";
+import React, { useState } from 'react';
+import { ArrowRight, MapPin, Phone, Mail, CheckCircle2, Loader2, Building2, User } from 'lucide-react';
+import { useTheme } from '@/contexts/ThemeContext';
 
-const reasonOptions = [
-  { value: "select", label: "Select Service Interest" },
-  { value: "resourcing", label: "Resourcing" },
-  { value: "edtech", label: "EdTech" },
-  { value: "technology", label: "Technology" },
-  { value: "general", label: "General Inquiry" },
+const serviceOptions = [
+  { value: '', label: 'Select a service area...' },
+  { value: 'Resourcing & Talent', label: 'Resourcing & Talent' },
+  { value: 'Education & Capability Training', label: 'Education & Capability Training' },
+  { value: 'Training', label: 'Training' },
+  { value: 'Digital Technology Advisory', label: 'Digital Technology Advisory' },
+  { value: 'LEG UP — I\'m an Employer', label: 'LEG UP — I\'m an Employer' },
+  { value: 'LEG UP — I\'m Looking for Opportunities', label: 'LEG UP — I\'m Looking for Opportunities' },
+  { value: 'Strategic Partnership', label: 'Strategic Partnership' },
+  { value: 'General Enquiry', label: 'General Enquiry' },
 ];
 
 export default function ContactPage() {
-  const { toast } = useToast();
   const { isDark } = useTheme();
-  const form = useRef<HTMLFormElement>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [reasonForEnquiry, setReasonForEnquiry] = useState("select");
-  const [emailJSLoaded, setEmailJSLoaded] = useState(false);
 
-  // Load EmailJS dynamically
-  useEffect(() => {
-    if ((window as any).emailjs) {
-      setEmailJSLoaded(true);
-      return;
-    }
-    
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
-    script.async = true;
-    
-    script.onload = () => {
-      (window as any).emailjs.init('UCiv2mzh9PWuZPf1X');
-      setEmailJSLoaded(true);
-    };
-    
-    script.onerror = () => {
-      console.error('Failed to load EmailJS');
-    };
-    
-    document.head.appendChild(script);
-    
-    return () => {
-      if (document.head.contains(script)) {
-        document.head.removeChild(script);
-      }
-    };
-  }, []);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    organisation: '',
+    serviceInterest: '',
+    message: '',
+  });
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorMsg, setErrorMsg] = useState('');
 
-  const handleGetDirections = (e: React.MouseEvent<HTMLAnchorElement>, address: string) => {
-    e.preventDefault();
-    const encodedAddress = encodeURIComponent(address);
-    const userAgent = navigator.userAgent.toLowerCase();
-    const isIOS = /iphone|ipad|ipod/.test(userAgent);
-    const isAndroid = /android/.test(userAgent);
-
-    let mapsUrl;
-    if (isIOS) {
-      mapsUrl = `maps://maps.apple.com/?q=${encodedAddress}`;
-    } else if (isAndroid) {
-      mapsUrl = `geo:0,0?q=${encodedAddress}`;
-    } else {
-      mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
-    }
-
-    window.open(mapsUrl, "_blank");
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!form.current || !emailJSLoaded) {
-      toast({
-        title: "Error",
-        description: "Email service is not ready. Please try again in a moment.",
-        variant: "destructive",
-      });
+    if (!formData.serviceInterest) {
+      setErrorMsg('Please select a service area.');
       return;
     }
-
-    setIsSubmitting(true);
-
+    setErrorMsg('');
+    setStatus('submitting');
     try {
-      const result = await (window as any).emailjs.sendForm(
-        'service_ybmsmpf',
-        'template_ocysv8r',
-        form.current,
-        'UCiv2mzh9PWuZPf1X'
-      );
-
-      console.log('Email sent successfully:', result.text);
-      
-      toast({
-        title: "Success!",
-        description: "Your message has been sent successfully. We'll get back to you soon!",
-        variant: "default",
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
       });
-
-      // Reset form
-      form.current.reset();
-      setReasonForEnquiry("select");
-
-    } catch (error) {
-      console.error('Email sending failed:', error);
-      
-      toast({
-        title: "Error",
-        description: "Failed to send your message. Please try again or contact us directly.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
+      if (!res.ok) throw new Error('Server error');
+      setStatus('success');
+    } catch {
+      setStatus('error');
+      setErrorMsg('Something went wrong. Please try again or email us directly at hello@redtechafrica.com');
     }
   };
+
+  const inputBase = `w-full px-4 py-3 rounded-xl border text-sm transition-all duration-200 outline-none focus:ring-2 focus:ring-[#8e5e42]/30 ${
+    isDark
+      ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-500 focus:border-[#8e5e42]'
+      : 'bg-white border-gray-200 text-gray-900 placeholder-gray-400 focus:border-[#8e5e42]'
+  }`;
+
+  const label = `block text-xs font-bold uppercase tracking-widest mb-2 ${isDark ? 'text-gray-400' : 'text-gray-500'}`;
 
   return (
-    <div className={`min-h-screen w-full transition-colors duration-300 ${
-      isDark ? 'bg-gray-900' : 'bg-[#8e5e42]/5'
-    }`}>
-      {/* Animated background */}
+    <div className={`min-h-screen transition-all duration-500 ${isDark ? 'bg-gray-950 text-white' : 'bg-[#f9f7f5] text-gray-900'}`}>
+
+      {/* Subtle background blobs */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className={`absolute -top-40 -right-40 w-80 h-80 rounded-full opacity-20 animate-pulse ${
-          isDark ? 'bg-[#8e5e42]' : 'bg-[#8e5e42]'
-        }`}></div>
-        <div className={`absolute -bottom-40 -left-40 w-80 h-80 rounded-full opacity-20 animate-pulse delay-1000 ${
-          isDark ? 'bg-[#8e5e42]' : 'bg-[#8e5e42]'
-        }`}></div>
+        <div className={`absolute top-0 right-0 w-[500px] h-[500px] blur-3xl opacity-30 ${isDark ? 'bg-[#8e5e42]/15' : 'bg-[#8e5e42]/8'}`} />
+        <div className={`absolute bottom-0 left-0 w-96 h-96 blur-3xl opacity-20 ${isDark ? 'bg-[#8e5e42]/10' : 'bg-[#8e5e42]/5'}`} />
       </div>
-      
-      <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-20">
-        <h1 className={`text-4xl font-light text-center mb-12 transition-colors duration-300 font-heading ${
-          isDark ? 'text-white' : 'text-gray-900'
-        }`}>
-          Let's Build Something Great Together.
-        </h1>
 
-        <div className={`p-6 sm:p-8 rounded-lg shadow-sm mb-12 transition-colors duration-300 ${
-          isDark ? 'bg-gray-800 shadow-[#8e5e42]/10' : 'bg-white shadow-[#8e5e42]/10'
-        }`}>
-          <form ref={form} onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid sm:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label htmlFor="firstName" className={`text-sm transition-colors duration-300 ${
-                  isDark ? 'text-gray-300' : 'text-gray-700'
-                }`}>
-                  First Name <span className="text-[#8e5e42]">*</span>
-                </label>
-                <Input 
-                  id="firstName" 
-                  name="firstName" 
-                  required 
-                  className={isDark ? 'bg-gray-700 border-gray-600 text-white' : ''}
-                />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="lastName" className={`text-sm transition-colors duration-300 ${
-                  isDark ? 'text-gray-300' : 'text-gray-700'
-                }`}>
-                  Last Name <span className="text-[#8e5e42]">*</span>
-                </label>
-                <Input 
-                  id="lastName" 
-                  name="lastName" 
-                  required 
-                  className={isDark ? 'bg-gray-700 border-gray-600 text-white' : ''}
-                />
-              </div>
-            </div>
+      <div className="relative container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24">
 
-            <div className="grid sm:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label htmlFor="email" className={`text-sm transition-colors duration-300 ${
-                  isDark ? 'text-gray-300' : 'text-gray-700'
-                }`}>
-                  Email <span className="text-[#8e5e42]">*</span>
-                </label>
-                <Input 
-                  id="email" 
-                  name="email" 
-                  type="email" 
-                  required 
-                  className={isDark ? 'bg-gray-700 border-gray-600 text-white' : ''}
-                />
-              </div>
-              <div className="space-y-2">
-                <label htmlFor="companyName" className={`text-sm transition-colors duration-300 ${
-                  isDark ? 'text-gray-300' : 'text-gray-700'
-                }`}>
-                  Company Name <span className="text-[#8e5e42]">*</span>
-                </label>
-                <Input 
-                  id="companyName" 
-                  name="companyName" 
-                  required 
-                  className={isDark ? 'bg-gray-700 border-gray-600 text-white' : ''}
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <label htmlFor="reasonForEnquiry" className={`text-sm transition-colors duration-300 ${
-                isDark ? 'text-gray-300' : 'text-gray-700'
-              }`}>
-                Service Interest <span className="text-[#8e5e42]">*</span>
-              </label>
-              <Select name="reasonForEnquiry" value={reasonForEnquiry} onValueChange={setReasonForEnquiry} required>
-                <SelectTrigger className={isDark ? 'bg-gray-700 border-gray-600 text-white' : ''}>
-                  <SelectValue placeholder="Select" />
-                </SelectTrigger>
-                <SelectContent className={isDark ? 'bg-gray-700 border-gray-600' : ''}>
-                  {reasonOptions.map((option) => (
-                    <SelectItem 
-                      key={option.value} 
-                      value={option.value}
-                      className={isDark ? 'text-white hover:bg-gray-600' : ''}
-                    >
-                      {option.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-      
-            <div className="space-y-2">
-              <label htmlFor="additionalComments" className={`text-sm transition-colors duration-300 ${
-                isDark ? 'text-gray-300' : 'text-gray-700'
-              }`}>
-                Additional Comments
-              </label>
-              <Textarea 
-                id="additionalComments" 
-                name="additionalComments" 
-                className={`min-h-[100px] ${isDark ? 'bg-gray-700 border-gray-600 text-white' : ''}`}
-              />
-            </div>
-
-            <div className={`text-sm transition-colors duration-300 ${
-              isDark ? 'text-gray-400' : 'text-gray-500'
-            }`}>
-              <p className="mb-2">
-                We're committed to your privacy. RAC uses the information you provide to keep you
-                informed about our services, product updates, and industry insights. By submitting
-                this form, you agree to receive these communications from us. For more details on how we handle and
-                protect your data, please review our{" "}
-                <a href="/privacy" className="text-[#8e5e42] hover:underline">
-                  Privacy Policy
-                </a>
-                .
-              </p>
-              <p>You can opt out of these communications at any time.</p>
-            </div>
-
-            <Button 
-              type="submit" 
-              variant="outline" 
-              disabled={isSubmitting || !emailJSLoaded} 
-              className={`w-32 transition-all duration-300 ${
-                isDark 
-                  ? 'border-[#8e5e42] text-[#8e5e42] hover:bg-[#8e5e42]/10' 
-                  : 'border-[#8e5e42] text-[#8e5e42] hover:bg-[#8e5e42]/10'
-              }`}
-            >
-              {isSubmitting ? (
-                <span className="flex items-center gap-2">
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  Sending...
-                </span>
-              ) : (
-                <span className="flex items-center gap-2">
-                  Submit <ArrowRight className="h-4 w-4" />
-                </span>
-              )}
-            </Button>
-          </form>
+        {/* Page Header */}
+        <div className="max-w-2xl mb-16">
+          <p className="text-xs font-bold tracking-[0.25em] uppercase text-[#8e5e42] mb-4">Get In Touch</p>
+          <h1 className={`font-heading font-black leading-tight mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}
+            style={{ fontSize: 'clamp(2.4rem, 5vw, 4rem)' }}>
+            Let's Start a Real Conversation.
+          </h1>
+          <p className={`text-lg leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+            No pitch decks. No jargon. Tell us what you're working with and we'll tell you honestly whether and how we can help.
+          </p>
         </div>
 
-        {/* Location section */}
-        <div className="space-y-6 px-4 sm:px-0">
-          <h2 className={`text-2xl font-light transition-colors duration-300 font-heading ${
-            isDark ? 'text-white' : 'text-gray-900'
-          }`}>
-            Our Locations
-          </h2>
+        <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-start">
 
-          {/* Map View */}
-          <LocationMap isDark={isDark} />
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="space-y-4">
-              <h3 className={`text-xl font-medium transition-colors duration-300 font-heading ${
-                isDark ? 'text-white' : 'text-gray-900'
-              }`}>
-                Lagos Island Location
-              </h3>
-              <div className="space-y-2">
-                <div className="flex items-start gap-2">
-                  <MapPin className={`h-5 w-5 mt-1 transition-colors duration-300 ${
-                    isDark ? 'text-gray-400' : 'text-gray-400'
-                  }`} />
+          {/* ─── FORM ─── */}
+          <div className="lg:col-span-3">
+            {status === 'success' ? (
+              <div className={`rounded-3xl p-12 text-center border ${isDark ? 'bg-gray-900 border-[#8e5e42]/30' : 'bg-white border-[#8e5e42]/20'}`}>
+                <div className="w-20 h-20 rounded-full bg-[#8e5e42]/10 flex items-center justify-center mx-auto mb-6">
+                  <CheckCircle2 className="text-[#8e5e42]" size={40} />
+                </div>
+                <h2 className={`text-2xl font-bold font-heading mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  Message Received.
+                </h2>
+                <p className={`text-base leading-relaxed mb-8 max-w-md mx-auto ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  Thank you for reaching out. We've sent a confirmation to your email and our team will be in touch within one business day.
+                </p>
+                <button
+                  onClick={() => { setStatus('idle'); setFormData({ name: '', email: '', organisation: '', serviceInterest: '', message: '' }); }}
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-[#8e5e42] text-white font-bold rounded-xl hover:bg-[#8e5e42]/90 transition-all duration-200"
+                >
+                  Send Another Message <ArrowRight size={16} />
+                </button>
+              </div>
+            ) : (
+              <form
+                onSubmit={handleSubmit}
+                className={`rounded-3xl p-8 sm:p-10 border shadow-sm ${isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-100'}`}
+              >
+                <div className="grid sm:grid-cols-2 gap-6 mb-6">
                   <div>
-                    <p className={`transition-colors duration-300 ${
-                      isDark ? 'text-gray-300' : 'text-gray-700'
-                    }`}>
-                      Unit 20, Trocadero Square, The Rock Drive, <br/>Lekki Phase 1, Lagos, Nigeria.
-                    </p>
+                    <label className={label}>Full Name *</label>
+                    <div className="relative">
+                      <User size={15} className={`absolute left-3.5 top-1/2 -translate-y-1/2 ${isDark ? 'text-gray-500' : 'text-gray-400'}`} />
+                      <input
+                        name="name"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="e.g. Amaka Okonkwo"
+                        className={`${inputBase} pl-10`}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className={label}>Email Address *</label>
+                    <div className="relative">
+                      <Mail size={15} className={`absolute left-3.5 top-1/2 -translate-y-1/2 ${isDark ? 'text-gray-500' : 'text-gray-400'}`} />
+                      <input
+                        name="email"
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="you@company.com"
+                        className={`${inputBase} pl-10`}
+                      />
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Phone className={`h-5 w-5 transition-colors duration-300 ${
-                    isDark ? 'text-gray-400' : 'text-gray-400'
-                  }`} />
-                  <p className={`transition-colors duration-300 ${
-                    isDark ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    +234 818 969 6614
+
+                <div className="mb-6">
+                  <label className={label}>Organisation / Company <span className={`${isDark ? 'text-gray-600' : 'text-gray-400'} font-normal normal-case tracking-normal`}>(optional)</span></label>
+                  <div className="relative">
+                    <Building2 size={15} className={`absolute left-3.5 top-1/2 -translate-y-1/2 ${isDark ? 'text-gray-500' : 'text-gray-400'}`} />
+                    <input
+                      name="organisation"
+                      value={formData.organisation}
+                      onChange={handleChange}
+                      placeholder="Your organisation name"
+                      className={`${inputBase} pl-10`}
+                    />
+                  </div>
+                </div>
+
+                <div className="mb-6">
+                  <label className={label}>Service Interest *</label>
+                  <select
+                    name="serviceInterest"
+                    required
+                    value={formData.serviceInterest}
+                    onChange={handleChange}
+                    className={`${inputBase} appearance-none cursor-pointer`}
+                    style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238e5e42' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 16px center' }}
+                  >
+                    {serviceOptions.map(opt => (
+                      <option key={opt.value} value={opt.value} disabled={opt.value === ''} className={isDark ? 'bg-gray-800' : 'bg-white'}>
+                        {opt.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="mb-8">
+                  <label className={label}>Tell us more <span className={`${isDark ? 'text-gray-600' : 'text-gray-400'} font-normal normal-case tracking-normal`}>(optional)</span></label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows={4}
+                    placeholder="Share some context — what are you working on, what's the challenge, and what are you hoping to achieve?"
+                    className={`${inputBase} resize-none`}
+                  />
+                </div>
+
+                {errorMsg && (
+                  <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20">
+                    <p className="text-sm text-red-400">{errorMsg}</p>
+                  </div>
+                )}
+
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <p className={`text-xs leading-relaxed max-w-xs ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
+                    By submitting, you agree to our{' '}
+                    <a href="/privacy" className="text-[#8e5e42] hover:underline">Privacy Policy</a>.
+                    We don't spam.
                   </p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Mail className={`h-5 w-5 transition-colors duration-300 ${
-                    isDark ? 'text-gray-400' : 'text-gray-400'
-                  }`} />
-                  <a 
-                    href="mailto:hello@redtechafrica.com" 
-                    className={`transition-colors duration-300 ${
-                      isDark ? 'text-gray-300 hover:text-[#8e5e42]' : 'text-gray-700 hover:text-[#8e5e42]'
-                    }`}
+                  <button
+                    type="submit"
+                    disabled={status === 'submitting'}
+                    className="flex-shrink-0 inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#8e5e42] text-white font-bold text-sm rounded-xl hover:bg-[#8e5e42]/90 hover:shadow-lg hover:shadow-[#8e5e42]/25 hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    hello@redtechafrica.com
-                  </a>
+                    {status === 'submitting' ? (
+                      <><Loader2 size={16} className="animate-spin" /> Sending...</>
+                    ) : (
+                      <>Send Message <ArrowRight size={16} /></>
+                    )}
+                  </button>
                 </div>
-                <div className="flex items-center gap-2">
-                  <a
-                    href="#"
-                    onClick={(e) => handleGetDirections(e, "Unit 20, Trocadero Square, The Rock Drive, Lekki Phase 1, Lagos, Nigeria")}
-                    className="text-[#8e5e42] hover:underline"
-                  >
-                    Get Directions {">"}
-                  </a>
-                </div>
+              </form>
+            )}
+          </div>
+
+          {/* ─── SIDEBAR ─── */}
+          <div className="lg:col-span-2 space-y-8">
+
+            {/* Image */}
+            <div className="w-full h-56 rounded-3xl overflow-hidden relative group shadow-lg">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10" />
+              <img
+                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=800"
+                alt="REDtech Africa Team"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute bottom-4 left-5 z-20">
+                <p className="text-white text-xs font-bold tracking-widest uppercase opacity-80">Practitioners. Not Consultants.</p>
               </div>
             </div>
 
-            <div className="space-y-4">
-              <h3 className={`text-xl font-medium transition-colors duration-300 font-heading ${
-                isDark ? 'text-white' : 'text-gray-900'
-              }`}>
-                London, UK Location
-              </h3>
-              <div className="space-y-2">
-                <div className="flex items-start gap-2">
-                  <MapPin className={`h-5 w-5 mt-1 transition-colors duration-300 ${
-                    isDark ? 'text-gray-400' : 'text-gray-400'
-                  }`} />
-                  <div>
-                    <p className={`transition-colors duration-300 ${
-                      isDark ? 'text-gray-300' : 'text-gray-700'
-                    }`}>
-                      11 Old Bond Street, Mayfair, London<br/> W1S 4PN, United Kingdom
-                    </p>
-                  </div>
+            {/* Lagos */}
+            <div className={`p-6 rounded-2xl border ${isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-100'}`}>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-6 h-6 rounded-full bg-[#8e5e42]/10 flex items-center justify-center">
+                  <MapPin size={13} className="text-[#8e5e42]" />
                 </div>
-                <div className="flex items-center gap-2">
-                  <Phone className={`h-5 w-5 transition-colors duration-300 ${
-                    isDark ? 'text-gray-400' : 'text-gray-400'
-                  }`} />
-                  <p className={`transition-colors duration-300 ${
-                    isDark ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    +44 7535 718997
-                  </p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Mail className={`h-5 w-5 transition-colors duration-300 ${
-                    isDark ? 'text-gray-400' : 'text-gray-400'
-                  }`} />
-                  <a 
-                    href="mailto:hello@redtechafrica.com" 
-                    className={`transition-colors duration-300 ${
-                      isDark ? 'text-gray-300 hover:text-[#8e5e42]' : 'text-gray-700 hover:text-[#8e5e42]'
-                    }`}
-                  >
-                    hello@redtechafrica.com
-                  </a>
-                </div>
-                <div className="flex items-center gap-2">
-                  <a
-                    href="#"
-                    onClick={(e) =>
-                      handleGetDirections(e, "11 Old Bond Street, Mayfair, London W1S 4PN, UK")
-                    }
-                    className="text-[#8e5e42] hover:underline"
-                  >
-                    Get Directions {">"}
-                  </a>
-                </div>
+                <span className={`text-xs font-bold uppercase tracking-widest ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Lagos, Nigeria</span>
+              </div>
+              <p className={`text-sm leading-relaxed mb-3 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                Unit 20, Trocadero Square,<br />The Rock Drive, Lekki Phase 1
+              </p>
+              <div className="flex items-center gap-2">
+                <Phone size={13} className="text-[#8e5e42]" />
+                <a href="tel:+2348189696614" className={`text-sm hover:text-[#8e5e42] transition-colors ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>+234 818 969 6614</a>
               </div>
             </div>
+
+            {/* London */}
+            <div className={`p-6 rounded-2xl border ${isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-100'}`}>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-6 h-6 rounded-full bg-[#8e5e42]/10 flex items-center justify-center">
+                  <MapPin size={13} className="text-[#8e5e42]" />
+                </div>
+                <span className={`text-xs font-bold uppercase tracking-widest ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>London, UK</span>
+              </div>
+              <p className={`text-sm leading-relaxed mb-3 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                11 Old Bond Street, Mayfair,<br />London W1S 4PN
+              </p>
+              <div className="flex items-center gap-2">
+                <Phone size={13} className="text-[#8e5e42]" />
+                <a href="tel:+447535718997" className={`text-sm hover:text-[#8e5e42] transition-colors ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>+44 7535 718997</a>
+              </div>
+            </div>
+
+            {/* Email */}
+            <div className={`p-6 rounded-2xl border ${isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-100'}`}>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-6 h-6 rounded-full bg-[#8e5e42]/10 flex items-center justify-center">
+                  <Mail size={13} className="text-[#8e5e42]" />
+                </div>
+                <span className={`text-xs font-bold uppercase tracking-widest ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Email Us</span>
+              </div>
+              <a href="mailto:hello@redtechafrica.com" className={`text-sm font-medium hover:text-[#8e5e42] transition-colors ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                hello@redtechafrica.com
+              </a>
+            </div>
+
           </div>
         </div>
       </div>

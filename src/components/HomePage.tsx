@@ -5,10 +5,6 @@ import { useTheme } from '@/contexts/ThemeContext';
 export default function HomePage() {
   const { isDark } = useTheme();
 
-  const accent = '#8e5e42';
-  const accentDim = 'rgba(142,94,66,0.15)';
-  const accentBorder = 'rgba(142,94,66,0.25)';
-
   return (
     <div className={`min-h-screen transition-all duration-500 overflow-hidden ${
       isDark
@@ -29,40 +25,63 @@ export default function HomePage() {
           ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-black'
           : 'bg-gradient-to-br from-[#8e5e42]/5 via-white to-[#8e5e42]/10'
       }`}>
-        <div className="container max-w-5xl mx-auto z-10">
+        <div className="container max-w-6xl mx-auto z-10">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-          {/* Label */}
-          <p className="text-xs font-bold tracking-[0.15em] sm:tracking-[0.25em] uppercase text-[#8e5e42] mb-8 leading-relaxed">
-            REDtech Africa Consulting (RAC)
-          </p>
+            {/* Left: Copy */}
+            <div>
+              <p className="text-xs font-bold tracking-[0.15em] sm:tracking-[0.25em] uppercase text-[#8e5e42] mb-8 leading-relaxed">
+                REDtech Africa Consulting (RAC)
+              </p>
+              <h1
+                className={`font-heading font-black leading-[1.05] mb-8 ${isDark ? 'text-white' : 'text-gray-900'}`}
+                style={{ fontSize: 'clamp(2.8rem, 6vw, 5.2rem)' }}
+              >
+                <span className="block">Closing the Gap Between</span>
+                <span className="block">the Workforce You Have</span>
+                <span className={`block italic ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                  and the Results You Need.
+                </span>
+              </h1>
+              <p className={`text-lg md:text-xl max-w-2xl leading-relaxed mb-12 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                RAC closes that gap — through resourcing, education, and digital advisory that only comes from 15+ years on the inside: within HR teams, financial institutions, and technology organisations across Nigeria and the UK.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="/contact"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#8e5e42] text-white font-bold text-base rounded-xl hover:bg-[#8e5e42]/90 hover:shadow-xl hover:shadow-[#8e5e42]/25 transition-all duration-300 hover:-translate-y-1"
+                >
+                  Start the Conversation <ArrowRight size={18} />
+                </a>
+                <a
+                  href="/services"
+                  className={`inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-[#8e5e42] font-bold text-base rounded-xl transition-all duration-300 hover:-translate-y-1 ${
+                    isDark ? 'text-white hover:bg-[#8e5e42]/10' : 'text-gray-900 hover:bg-[#8e5e42]/10'
+                  }`}
+                >
+                  Discover Our Services
+                </a>
+              </div>
+            </div>
 
-          {/* Main Headline */}
-          <h1
-            className={`font-heading font-black leading-[1.05] mb-8 ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}
-            style={{ fontSize: 'clamp(2.8rem, 6vw, 5.2rem)' }}
-          >
-            <span className="block">Closing the Gap Between</span>
-            <span className="block">the Workforce You Have</span>
-            <span className={`block italic ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-              and the Results You Need.
-            </span>
-          </h1>
-
-          {/* Sub-headline */}
-          <p className={`text-lg md:text-xl max-w-2xl leading-relaxed mb-12 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-            RAC closes that gap — through resourcing, education, and digital advisory that only comes from 15+ years on the inside: within HR teams, financial institutions, and technology organisations across Nigeria and the UK.
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#8e5e42] text-white font-bold text-base rounded-xl hover:bg-[#8e5e42]/90 hover:shadow-xl hover:shadow-[#8e5e42]/25 transition-all duration-300 hover:-translate-y-1"
-            >
-              Start the Conversation <ArrowRight size={18} />
-            </a>
+            {/* Right: Hero Image */}
+            <div className="relative hidden lg:block">
+              <div className="relative w-full h-[500px] rounded-3xl overflow-hidden shadow-2xl group">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10" />
+                <img
+                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=900"
+                  alt="Professional team collaboration"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                {/* Floating badge */}
+                <div className={`absolute bottom-6 left-6 right-6 z-20 p-4 rounded-2xl backdrop-blur-md border ${isDark ? 'bg-black/60 border-white/10' : 'bg-white/80 border-white/60'}`}>
+                  <p className="text-xs font-bold uppercase tracking-widest text-[#8e5e42] mb-1">Built on insider knowledge</p>
+                  <p className={`text-sm font-medium ${isDark ? 'text-white' : 'text-gray-900'}`}>15+ years working inside HR, financial institutions & tech organisations</p>
+                </div>
+              </div>
+              {/* Decorative accent */}
+              <div className="absolute -bottom-4 -right-4 w-32 h-32 rounded-2xl bg-[#8e5e42]/20 blur-xl" />
+            </div>
           </div>
         </div>
 
@@ -94,7 +113,6 @@ export default function HomePage() {
       <section className={`py-20 px-4 sm:px-6 lg:px-8 ${isDark ? 'bg-black' : 'bg-gray-50'}`}>
         <div className="container max-w-5xl mx-auto">
           <p className="text-xs font-bold tracking-[0.25em] uppercase text-[#8e5e42] mb-10">What RAC Stands For</p>
-
           <div className="grid md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-[#8e5e42]/20 -mx-4 sm:mx-0 px-4 sm:px-0">
             {[
               {
@@ -137,23 +155,50 @@ export default function HomePage() {
           </p>
 
           <div className="grid md:grid-cols-2 gap-6 mb-8">
-            <div className={`p-8 rounded-3xl border ${isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'}`}>
-              <h3 className={`text-xl font-bold mb-4 pb-4 border-b ${isDark ? 'border-gray-800 text-white' : 'border-gray-200 text-gray-900'}`}>Organisations Say</h3>
-              <p className="text-[#8e5e42] font-bold text-lg mb-4">"We keep investing in our people, but nothing seems to change."</p>
-              <ul className={`space-y-2 text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                {['Hiring processes that screen for credentials, not capability', 'Training delivered and forgotten — with no measurable shift in performance', 'Digital tools adopted without the knowledge to use them effectively', "High-potential people leaving because growth pathways don't exist"].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2"><span className="text-[#8e5e42] mt-0.5">•</span>{item}</li>
-                ))}
-              </ul>
+            {/* Organisations card */}
+            <div className={`rounded-3xl border overflow-hidden ${isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'}`}>
+              <div className="h-48 overflow-hidden relative">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50 z-10" />
+                <img
+                  src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=700"
+                  alt="Organisation boardroom"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute bottom-4 left-5 z-20">
+                  <p className="text-white font-bold text-sm">Organisations Say</p>
+                </div>
+              </div>
+              <div className="p-8">
+                <p className="text-[#8e5e42] font-bold text-lg mb-4">"We keep investing in our people, but nothing seems to change."</p>
+                <ul className={`space-y-2 text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  {['Hiring processes that screen for credentials, not capability', 'Training delivered and forgotten — with no measurable shift in performance', 'Digital tools adopted without the knowledge to use them effectively', "High-potential people leaving because growth pathways don't exist"].map((item, i) => (
+                    <li key={i} className="flex items-start gap-2"><span className="text-[#8e5e42] mt-0.5">•</span>{item}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <div className={`p-8 rounded-3xl border ${isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'}`}>
-              <h3 className={`text-xl font-bold mb-4 pb-4 border-b ${isDark ? 'border-gray-800 text-white' : 'border-gray-200 text-gray-900'}`}>Talent Says</h3>
-              <p className="text-[#8e5e42] font-bold text-lg mb-4">"I have the ability. I just can't prove it in a way that gets me in the room."</p>
-              <ul className={`space-y-2 text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                {['No verifiable way to demonstrate real-world capability', 'No clear path from learning to employment or progression', 'Lost in a sea of CVs with nothing to differentiate', 'Skills developed in isolation, disconnected from what employers need'].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2"><span className="text-[#8e5e42] mt-0.5">•</span>{item}</li>
-                ))}
-              </ul>
+
+            {/* Talent card */}
+            <div className={`rounded-3xl border overflow-hidden ${isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'}`}>
+              <div className="h-48 overflow-hidden relative">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50 z-10" />
+                <img
+                  src="https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&q=80&w=700"
+                  alt="Young professional at work"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute bottom-4 left-5 z-20">
+                  <p className="text-white font-bold text-sm">Talent Says</p>
+                </div>
+              </div>
+              <div className="p-8">
+                <p className="text-[#8e5e42] font-bold text-lg mb-4">"I have the ability. I just can't prove it in a way that gets me in the room."</p>
+                <ul className={`space-y-2 text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  {['No verifiable way to demonstrate real-world capability', 'No clear path from learning to employment or progression', 'Lost in a sea of CVs with nothing to differentiate', 'Skills developed in isolation, disconnected from what employers need'].map((item, i) => (
+                    <li key={i} className="flex items-start gap-2"><span className="text-[#8e5e42] mt-0.5">•</span>{item}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
 
@@ -165,37 +210,48 @@ export default function HomePage() {
         </div>
       </section>
 
-
       {/* ── SECTION 5: LEGUP ── */}
       <section className="py-24 px-4 sm:px-6 lg:px-8">
         <div className="container max-w-5xl mx-auto">
-          <div className={`backdrop-blur-sm rounded-3xl p-12 border ${
+          <div className={`backdrop-blur-sm rounded-3xl overflow-hidden border ${
             isDark
               ? 'bg-gradient-to-br from-[#8e5e42]/20 to-gray-800/80 border-[#8e5e42]/30'
               : 'bg-gradient-to-br from-[#8e5e42]/10 to-white/80 border-[#8e5e42]/30'
           }`}>
-            <p className="text-xs font-bold tracking-[0.25em] uppercase text-[#8e5e42] mb-4">Platform</p>
-            <h2 className={`text-3xl md:text-4xl font-black font-heading mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              LEG UP — Where Capability Speaks Louder Than a CV.
-            </h2>
-            <p className={`text-lg leading-relaxed mb-6 max-w-2xl ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-              LEG UP is a hackathon-led talent matching and skill verification ecosystem built for the way work gets done. Through our Skill Snapshot, individuals are assessed on real, project-based capability — not unverified claims on a page. Employers see exactly what candidates can do whilst talent finally gets a fair shot at proving it.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="mailto:hello@redtechafrica.com?subject=LegUp - Employer Enquiry"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#8e5e42] text-white font-bold text-base rounded-xl hover:bg-[#8e5e42]/90 hover:shadow-xl hover:shadow-[#8e5e42]/25 transition-all duration-300 hover:-translate-y-1"
-              >
-                I'm an Employer <ArrowRight size={18} />
-              </a>
-              <a
-                href="mailto:hello@redtechafrica.com?subject=LegUp - Talent Enquiry"
-                className={`inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-[#8e5e42] font-bold text-base rounded-xl transition-all duration-300 hover:-translate-y-1 ${
-                  isDark ? 'text-white hover:bg-[#8e5e42]/10' : 'text-gray-900 hover:bg-[#8e5e42]/10'
-                }`}
-              >
-                I'm Looking for Opportunities
-              </a>
+            <div className="grid md:grid-cols-2 items-center">
+              <div className="p-10 sm:p-12">
+                <p className="text-xs font-bold tracking-[0.25em] uppercase text-[#8e5e42] mb-4">Platform</p>
+                <h2 className={`text-3xl md:text-4xl font-black font-heading mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  LEG UP — Where Capability Speaks Louder Than a CV.
+                </h2>
+                <p className={`text-lg leading-relaxed mb-6 max-w-2xl ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                  LEG UP is a hackathon-led talent matching and skill verification ecosystem. Through our Skill Snapshot, individuals are assessed on real, project-based capability. Employers see what candidates can do — not just what they claim.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a
+                    href="/contact"
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#8e5e42] text-white font-bold text-base rounded-xl hover:bg-[#8e5e42]/90 hover:shadow-xl hover:shadow-[#8e5e42]/25 transition-all duration-300 hover:-translate-y-1"
+                  >
+                    I'm an Employer <ArrowRight size={18} />
+                  </a>
+                  <a
+                    href="/contact"
+                    className={`inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-[#8e5e42] font-bold text-base rounded-xl transition-all duration-300 hover:-translate-y-1 ${
+                      isDark ? 'text-white hover:bg-[#8e5e42]/10' : 'text-gray-900 hover:bg-[#8e5e42]/10'
+                    }`}
+                  >
+                    I'm Looking for Opportunities
+                  </a>
+                </div>
+              </div>
+              <div className="h-64 md:h-full min-h-[300px] overflow-hidden relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent z-10" />
+                <img
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800"
+                  alt="LEG UP platform - team collaboration"
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -213,7 +269,7 @@ export default function HomePage() {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-8 text-center">
               {[
                 { num: '5K+', label: 'Community Members' },
-                { num: '4', label: 'Hackathons Hosted' },
+                { num: '7', label: 'Hackathons Hosted' },
                 { num: '2018', label: 'Year Founded' },
               ].map((stat, i) => (
                 <div key={i}>
@@ -258,14 +314,14 @@ export default function HomePage() {
                 title: 'Join the LEG UP Waitlist',
                 desc: 'Build a verifiable portfolio that speaks louder than a CV. Get matched to employers who hire on demonstrated capability — not credentials alone.',
                 cta: 'Join LEG UP',
-                href: 'mailto:hello@redtechafrica.com?subject=LEG UP - Join Waitlist',
+                href: '/contact',
               },
               {
                 tag: 'FOR EVERYONE',
                 title: 'Let\'s Build Something Together',
                 desc: "Whether you're an institution, investor, or strategic partner — if you see the same gap we do, let's talk about what ecosystem-level collaboration could unlock.",
                 cta: 'Explore Partnership',
-                href: 'mailto:hello@redtechafrica.com?subject=Partnership Enquiry',
+                href: '/contact',
               },
             ].map((card, i) => (
               <div

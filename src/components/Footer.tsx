@@ -20,16 +20,23 @@ export function Footer() {
     setIsSubmitting(true);
     setSubscriptionStatus('loading');
 
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!res.ok) throw new Error('Failed');
+
       setSubscriptionStatus('success');
       setEmail('');
+      setTimeout(() => setSubscriptionStatus('idle'), 5000);
+    } catch {
+      setSubscriptionStatus('idle');
+    } finally {
       setIsSubmitting(false);
-      
-      setTimeout(() => {
-        setSubscriptionStatus('idle');
-      }, 4000);
-    }, 1500);
+    }
   };
 
   const quickLinks = [
