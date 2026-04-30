@@ -51,7 +51,10 @@ export default function ServicesPage() {
             alt="Modern corporate workspace"
             className="w-full h-full object-cover"
           />
-          <div className={`absolute inset-0 ${isDark ? 'bg-gradient-to-r from-gray-900/95 via-gray-900/85 to-gray-900/60' : 'bg-gradient-to-r from-white/95 via-white/85 to-white/50'}`} />
+          <div className={`absolute inset-0 ${isDark
+            ? 'bg-gradient-to-r from-gray-900/97 via-gray-900/88 to-gray-900/60'
+            : 'bg-gradient-to-r from-white via-white/99 to-white/70'
+          }`} />
         </div>
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 py-32 lg:py-40">
@@ -161,7 +164,7 @@ export default function ServicesPage() {
             alt="Team meeting"
             className="w-full h-full object-cover"
           />
-          <div className={`absolute inset-0 ${isDark ? 'bg-gray-900/92' : 'bg-white/92'}`} />
+          <div className={`absolute inset-0 ${isDark ? 'bg-gray-900/92' : 'bg-white/97'}`} />
         </div>
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <h2 className={`text-5xl md:text-6xl font-black mb-8 font-heading ${isDark ? 'text-white' : 'text-gray-900'}`}>

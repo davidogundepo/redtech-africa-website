@@ -16,8 +16,11 @@ export default function LegUpPage() {
       <section className="relative min-h-screen flex items-center">
         {/* Full-bleed image right side */}
         <div className="absolute top-0 right-0 w-full lg:w-[50%] h-full overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/70 to-transparent z-10 lg:block hidden" />
-          <div className={`absolute inset-0 z-10 lg:hidden ${isDark ? 'bg-gray-900/80' : 'bg-white/80'}`} />
+          <div className={`absolute inset-0 z-10 hidden lg:block ${isDark
+            ? 'bg-gradient-to-r from-gray-900 via-gray-900/90 to-gray-900/30'
+            : 'bg-gradient-to-r from-white via-white/98 to-white/20'
+          }`} />
+          <div className={`absolute inset-0 z-10 lg:hidden ${isDark ? 'bg-gray-900/80' : 'bg-white/85'}`} />
           <img
             src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=85&w=1400&h=1000"
             alt="Diverse team of professionals collaborating on a project"
