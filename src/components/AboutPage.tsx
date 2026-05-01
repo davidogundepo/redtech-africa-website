@@ -111,37 +111,63 @@ export default function AboutPage() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20">
+      <section className="relative pt-24 pb-0">
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div 
+          <div
             data-animate
-            className={`text-center transition-all duration-1000 transform ${
+            className={`transition-all duration-1000 transform ${
               isVisible[0] ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
             }`}
           >
-            <h1 className={`text-7xl md:text-9xl font-black mb-8 leading-tight font-heading ${
-              isDark 
-                ? 'bg-gradient-to-r from-white via-[#8e5e42] to-[#8e5e42] bg-clip-text text-transparent'
-                : 'bg-gradient-to-r from-gray-900 via-[#8e5e42] to-[#8e5e42] bg-clip-text text-transparent'
-            }`}>
-              Who We Are
-            </h1>
-            <p className={`text-2xl md:text-3xl max-w-4xl mx-auto leading-relaxed mb-12 ${
-              isDark ? 'text-gray-300' : 'text-gray-600'
-            }`}>
-              RAC closes the gap between the workforce you have and the results you need — through resourcing, education, and digital advisory that only comes from 15+ years on the inside: within HR teams, financial institutions, and technology organisations.
-            </p>
-            
-            {/* Animated DNA Helix */}
-            <div className="flex justify-center items-center space-x-8 mt-16">
-              <div className={`w-24 h-24 rounded-full ${isDark ? 'bg-gradient-to-br from-[#8e5e42]/20 to-[#8e5e42]/40' : 'bg-gradient-to-br from-[#8e5e42]/30 to-[#8e5e42]/50'} flex items-center justify-center animate-pulse`}>
-                <Code size={32} className={isDark ? 'text-[#8e5e42]' : 'text-[#8e5e42]'} />
+            {/* Text + Image split */}
+            <div className="grid lg:grid-cols-2 gap-12 items-center mb-20">
+              <div>
+                <h1 className={`text-6xl md:text-8xl font-black mb-8 leading-tight font-heading ${
+                  isDark
+                    ? 'bg-gradient-to-r from-white via-[#8e5e42] to-[#8e5e42] bg-clip-text text-transparent'
+                    : 'bg-gradient-to-r from-gray-900 via-[#8e5e42] to-[#8e5e42] bg-clip-text text-transparent'
+                }`}>
+                  Who We Are
+                </h1>
+                <p className={`text-xl md:text-2xl leading-relaxed mb-10 ${
+                  isDark ? 'text-gray-300' : 'text-gray-600'
+                }`}>
+                  RAC closes the gap between the workforce you have and the results you need — through resourcing, education, and digital advisory that only comes from 15+ years on the inside: within HR teams, financial institutions, and technology organisations.
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className={`w-12 h-12 rounded-xl bg-[#8e5e42] flex items-center justify-center`}>
+                    <Code size={22} className="text-white" />
+                  </div>
+                  <div className={`w-14 h-14 rounded-xl bg-[#8e5e42]/80 flex items-center justify-center`}>
+                    <Brain size={26} className="text-white" />
+                  </div>
+                  <div className={`w-12 h-12 rounded-xl bg-[#8e5e42]/60 flex items-center justify-center`}>
+                    <Video size={22} className="text-white" />
+                  </div>
+                  <span className={`ml-2 text-sm font-semibold tracking-widest uppercase ${
+                    isDark ? 'text-gray-400' : 'text-gray-500'
+                  }`}>Resourcing · Education · Digital</span>
+                </div>
               </div>
-              <div className={`w-32 h-32 rounded-full ${isDark ? 'bg-gradient-to-br from-[#8e5e42]/20 to-[#8e5e42]/40' : 'bg-gradient-to-br from-[#8e5e42]/30 to-[#8e5e42]/50'} flex items-center justify-center animate-pulse delay-500`}>
-                <Brain size={40} className={isDark ? 'text-[#8e5e42]' : 'text-[#8e5e42]'} />
-              </div>
-              <div className={`w-24 h-24 rounded-full ${isDark ? 'bg-gradient-to-br from-[#8e5e42]/20 to-[#8e5e42]/40' : 'bg-gradient-to-br from-[#8e5e42]/30 to-[#8e5e42]/50'} flex items-center justify-center animate-pulse delay-1000`}>
-                <Video size={32} className={isDark ? 'text-[#8e5e42]' : 'text-[#8e5e42]'} />
+              {/* Hero image */}
+              <div className="relative">
+                <div className="rounded-3xl overflow-hidden shadow-2xl">
+                  <img
+                    src="https://images.unsplash.com/photo-1573497491765-dccce02b29df?w=800&h=600&fit=crop&crop=center&q=85"
+                    alt="Professional business consulting team"
+                    className="w-full h-[480px] object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-3xl" />
+                </div>
+                {/* Floating stat badge */}
+                <div className={`absolute -bottom-6 -left-6 ${
+                  isDark ? 'bg-gray-900 border-[#8e5e42]/30' : 'bg-white border-[#8e5e42]/20'
+                } border rounded-2xl px-6 py-4 shadow-xl`}>
+                  <p className="text-2xl font-black text-[#8e5e42]">15+</p>
+                  <p className={`text-xs font-semibold uppercase tracking-wider ${
+                    isDark ? 'text-gray-400' : 'text-gray-500'
+                  }`}>Years Insider Experience</p>
+                </div>
               </div>
             </div>
           </div>
@@ -238,46 +264,82 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className={`${isDark ? 'bg-gradient-to-r from-[#8e5e42]/10 to-[#8e5e42]/10 border-[#8e5e42]/20' : 'bg-gradient-to-r from-[#8e5e42]/10 to-[#8e5e42]/10 border-[#8e5e42]/30'} backdrop-blur-sm rounded-3xl p-12 border`}>
-              <h2 className={`text-5xl font-black mb-8 font-heading font-playfair ${isDark ? 'text-white' : 'text-gray-900'}`}>Our Presence</h2>
-              <p className={`text-xl leading-relaxed max-w-4xl mx-auto mb-8 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                <span className="block font-bold text-[#8e5e42] mb-4">Rooted in Africa. Active Globally.</span>
-                RAC works across the globe — bringing practitioner knowledge from two markets into every 
-                engagement. Our clients range from growing businesses navigating their first capability investment to 
-                established institutions restructuring how their people perform. What they share is a recognition that 
-                generic solutions no longer cut it — and a need for a partner who has been where they are.
-              </p>
-              <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-                <div className={`${isDark ? 'bg-gray-800/30' : 'bg-white/50'} rounded-xl p-4 text-center`}>
-                  <Globe size={24} className={`mx-auto mb-2 ${isDark ? 'text-[#8e5e42]' : 'text-[#8e5e42]'}`} />
-                  <span className={`font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>Africa</span>
+            <div className={`${isDark ? 'bg-gradient-to-r from-[#8e5e42]/10 to-[#8e5e42]/10 border-[#8e5e42]/20' : 'bg-gradient-to-r from-[#8e5e42]/10 to-[#8e5e42]/10 border-[#8e5e42]/30'} backdrop-blur-sm rounded-3xl overflow-hidden border`}>
+              <div className="grid lg:grid-cols-2 items-stretch">
+                {/* Image */}
+                <div className="relative h-64 lg:h-auto">
+                  <img
+                    src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=800&h=600&fit=crop&crop=center&q=85"
+                    alt="Africa and global presence"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className={`absolute inset-0 ${
+                    isDark ? 'bg-gradient-to-r from-transparent to-gray-900/60' : 'bg-gradient-to-r from-transparent to-[#8e5e42]/20'
+                  }`} />
                 </div>
-                <div className={`${isDark ? 'bg-gray-800/30' : 'bg-white/50'} rounded-xl p-4 text-center`}>
-                  <Globe size={24} className={`mx-auto mb-2 ${isDark ? 'text-[#8e5e42]' : 'text-[#8e5e42]'}`} />
-                  <span className={`font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>Europe</span>
+                {/* Content */}
+                <div className="p-10 lg:p-14">
+                  <h2 className={`text-4xl font-black mb-6 font-heading font-playfair ${isDark ? 'text-white' : 'text-gray-900'}`}>Our Presence</h2>
+                  <p className={`text-lg leading-relaxed mb-8 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                    <span className="block font-bold text-[#8e5e42] mb-3">Rooted in Africa. Active Globally.</span>
+                    RAC works across the globe — bringing practitioner knowledge from two markets into every engagement. Our clients range from growing businesses navigating their first capability investment to established institutions restructuring how their people perform.
+                  </p>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className={`${isDark ? 'bg-gray-800/50' : 'bg-white/70'} rounded-2xl p-4 text-center border ${
+                      isDark ? 'border-[#8e5e42]/20' : 'border-[#8e5e42]/20'
+                    }`}>
+                      <Globe size={24} className="mx-auto mb-2 text-[#8e5e42]" />
+                      <span className={`font-bold text-sm ${isDark ? 'text-white' : 'text-gray-900'}`}>Africa</span>
+                    </div>
+                    <div className={`${isDark ? 'bg-gray-800/50' : 'bg-white/70'} rounded-2xl p-4 text-center border ${
+                      isDark ? 'border-[#8e5e42]/20' : 'border-[#8e5e42]/20'
+                    }`}>
+                      <Globe size={24} className="mx-auto mb-2 text-[#8e5e42]" />
+                      <span className={`font-bold text-sm ${isDark ? 'text-white' : 'text-gray-900'}`}>Europe</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className={`${isDark ? 'bg-gradient-to-r from-[#8e5e42]/10 to-[#8e5e42]/10 border-[#8e5e42]/20' : 'bg-gradient-to-r from-[#8e5e42]/10 to-[#8e5e42]/10 border-[#8e5e42]/30'} backdrop-blur-sm rounded-3xl p-12 border`}>
-              <h2 className={`text-5xl font-black mb-8 font-heading font-playfair ${isDark ? 'text-white' : 'text-gray-900'}`}>Our History</h2>
-              <p className={`text-xl leading-relaxed max-w-4xl mx-auto mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                REDtech Africa Consulting was founded in 2018 on a simple but urgent insight — that the gap 
-                between learning and real work was costing organisations and individuals alike. Too many people 
-                were being trained without being employed. Too many organisations were spending on development 
-                without seeing performance shift. And too many technology investments were landing without the 
-                capability to make them work.
-              </p>
-              <p className={`text-xl leading-relaxed max-w-4xl mx-auto mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                RAC was built to change that. Drawing on 15+ years spent working inside HR functions, financial 
-                institutions, and technology organisations across Nigeria and the UK, our founders designed a 
-                different kind of firm — one where resourcing, education, and digital advisory are not separate 
-                services, but a connected system for closing the capability gap.
-              </p>
-              <p className={`text-xl leading-relaxed max-w-4xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                From day one, the mission has been the same: connect learning to real work, build skills that earn, 
-                and develop people and organisations from the inside out.
-              </p>
+            <div className={`${isDark ? 'bg-gradient-to-r from-[#8e5e42]/10 to-[#8e5e42]/10 border-[#8e5e42]/20' : 'bg-gradient-to-r from-[#8e5e42]/10 to-[#8e5e42]/10 border-[#8e5e42]/30'} backdrop-blur-sm rounded-3xl overflow-hidden border`}>
+              <div className="grid lg:grid-cols-2 items-stretch">
+                {/* Content */}
+                <div className="p-10 lg:p-14">
+                  <h2 className={`text-4xl font-black mb-6 font-heading font-playfair ${isDark ? 'text-white' : 'text-gray-900'}`}>Our History</h2>
+                  <p className={`text-base leading-relaxed mb-4 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                    REDtech Africa Consulting was founded in 2018 on a simple but urgent insight — that the gap
+                    between learning and real work was costing organisations and individuals alike. Too many people
+                    were being trained without being employed.
+                  </p>
+                  <p className={`text-base leading-relaxed mb-4 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                    Drawing on 15+ years spent working inside HR functions, financial institutions, and technology
+                    organisations across Nigeria and the UK, our founders designed a different kind of firm — one
+                    where resourcing, education, and digital advisory are a connected system.
+                  </p>
+                  <p className={`text-base leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                    From day one, the mission has been the same: connect learning to real work, build skills that earn,
+                    and develop people and organisations from the inside out.
+                  </p>
+                </div>
+                {/* Image */}
+                <div className="relative h-64 lg:h-auto">
+                  <img
+                    src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=600&fit=crop&crop=center&q=85"
+                    alt="Corporate team meeting and strategy"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className={`absolute inset-0 ${
+                    isDark ? 'bg-gradient-to-l from-transparent to-gray-900/50' : 'bg-gradient-to-l from-transparent to-[#8e5e42]/10'
+                  }`} />
+                  {/* Year badge */}
+                  <div className={`absolute top-6 right-6 ${
+                    isDark ? 'bg-gray-900/90' : 'bg-white/90'
+                  } rounded-2xl px-5 py-3 shadow-lg backdrop-blur-sm`}>
+                    <p className="text-xl font-black text-[#8e5e42]">Est. 2018</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -338,26 +400,47 @@ export default function AboutPage() {
                   title: 'Innovation',
                   desc: 'We don\'t retrofit old solutions to new problems. From hackathon-led skill verification to AI literacy programmes and digital advisory, we bring fresh thinking to how organisations resource, learn, and grow — always grounded in what works in the real world.',
                   icon: Rocket,
+                  img: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop&crop=center&q=80',
+                  imgAlt: 'Technology and digital innovation',
                 },
                 {
                   title: 'Collaboration',
                   desc: 'We work alongside our clients, not above them. Every engagement starts with understanding the organisation from the inside — its people, its gaps, its ambitions. We build with you, not just for you, because lasting capability only comes from shared ownership.',
                   icon: Users,
+                  img: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&h=400&fit=crop&crop=center&q=80',
+                  imgAlt: 'Team collaborating around a table',
                 },
                 {
                   title: 'Excellence',
-                  desc: 'We hold ourselves to the standard of the organisations we\'ve worked inside. That means no generic frameworks, no off-the-shelf programmes, and no advisory that isn\'t grounded in real experience. Every solution we deliver is practitioner-led, context-aware, and built to last beyond the engagement.',
+                  desc: 'We hold ourselves to the standard of the organisations we\'ve worked inside. No generic frameworks, no off-the-shelf programmes. Every solution is practitioner-led, context-aware, and built to last beyond the engagement.',
                   icon: Award,
+                  img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop&crop=faces&q=80',
+                  imgAlt: 'Professional excellence and achievement',
                 },
               ].map((value, idx) => {
                 const Icon = value.icon;
                 return (
-                  <div key={idx} className={`${isDark ? 'bg-gradient-to-br from-[#8e5e42]/10 to-[#8e5e42]/10 border-[#8e5e42]/20' : 'bg-gradient-to-br from-[#8e5e42]/5 to-[#8e5e42]/5 border-[#8e5e42]/20'} backdrop-blur-sm rounded-3xl p-8 border hover:shadow-xl transition-shadow duration-300`}>
-                    <div className={`w-16 h-16 bg-[#8e5e42] rounded-2xl flex items-center justify-center mb-6`}>
-                      <Icon size={28} className="text-white" />
+                  <div key={idx} className={`${
+                    isDark ? 'bg-gradient-to-br from-[#8e5e42]/10 to-[#8e5e42]/10 border-[#8e5e42]/20' : 'bg-gradient-to-br from-[#8e5e42]/5 to-[#8e5e42]/5 border-[#8e5e42]/20'
+                  } backdrop-blur-sm rounded-3xl overflow-hidden border hover:shadow-xl transition-shadow duration-300 group`}>
+                    {/* Photo header */}
+                    <div className="relative h-48 overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
+                      <img
+                        src={value.img}
+                        alt={value.imgAlt}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute bottom-4 left-4 z-20">
+                        <div className="w-12 h-12 bg-[#8e5e42] rounded-xl flex items-center justify-center">
+                          <Icon size={22} className="text-white" />
+                        </div>
+                      </div>
                     </div>
-                    <h3 className={`text-2xl font-bold mb-4 font-heading font-playfair ${isDark ? 'text-white' : 'text-gray-900'}`}>{value.title}</h3>
-                    <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>{value.desc}</p>
+                    <div className="p-7">
+                      <h3 className={`text-2xl font-bold mb-3 font-heading font-playfair ${isDark ? 'text-white' : 'text-gray-900'}`}>{value.title}</h3>
+                      <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>{value.desc}</p>
+                    </div>
                   </div>
                 );
               })}
