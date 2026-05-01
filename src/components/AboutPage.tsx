@@ -8,6 +8,7 @@ export default function AboutPage() {
   const [counter1, setCounter1] = useState(0);
   const [counter2, setCounter2] = useState(0);
   const [counter3, setCounter3] = useState(0);
+  const hasAnimated = React.useRef(false);
   const { isDark } = useTheme();
 
   const values = [
@@ -77,7 +78,8 @@ export default function AboutPage() {
       }, stepDuration);
     };
 
-    if (isVisible[3]) {
+    if (isVisible[3] && !hasAnimated.current) {
+      hasAnimated.current = true;
       animateCounters();
     }
   }, [isVisible]);
@@ -132,7 +134,7 @@ export default function AboutPage() {
                 <p className={`text-xl md:text-2xl leading-relaxed mb-10 ${
                   isDark ? 'text-gray-300' : 'text-gray-600'
                 }`}>
-                  RAC closes the gap between the workforce you have and the results you need — through resourcing, education, and digital advisory that only comes from 15+ years on the inside: within HR teams, financial institutions, and technology organisations.
+                  RAC closes the gap between the workforce you have and the results you need — through resourcing, education, and digital advisory that only comes from 7+ years on the inside: within HR teams, financial institutions, and technology organisations.
                 </p>
                 <div className="flex items-center gap-4">
                   <div className={`w-12 h-12 rounded-xl bg-[#8e5e42] flex items-center justify-center`}>
@@ -163,7 +165,7 @@ export default function AboutPage() {
                 <div className={`absolute -bottom-6 -left-6 ${
                   isDark ? 'bg-gray-900 border-[#8e5e42]/30' : 'bg-white border-[#8e5e42]/20'
                 } border rounded-2xl px-6 py-4 shadow-xl`}>
-                  <p className="text-2xl font-black text-[#8e5e42]">15+</p>
+                  <p className="text-2xl font-black text-[#8e5e42]">7+</p>
                   <p className={`text-xs font-semibold uppercase tracking-wider ${
                     isDark ? 'text-gray-400' : 'text-gray-500'
                   }`}>Years Insider Experience</p>
@@ -313,7 +315,7 @@ export default function AboutPage() {
                     were being trained without being employed.
                   </p>
                   <p className={`text-base leading-relaxed mb-4 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                    Drawing on 15+ years spent working inside HR functions, financial institutions, and technology
+                    Drawing on 7+ years spent working inside HR functions, financial institutions, and technology
                     organisations across Nigeria and the UK, our founders designed a different kind of firm — one
                     where resourcing, education, and digital advisory are a connected system.
                   </p>

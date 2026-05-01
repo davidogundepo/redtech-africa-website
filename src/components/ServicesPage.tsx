@@ -83,7 +83,7 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto">
           <div className={`p-8 rounded-3xl border-l-4 border-l-[#8e5e42] ${isDark ? 'bg-gray-900/80 border-y border-r border-gray-800' : 'bg-[#8e5e42]/5 border-y border-r border-[#8e5e42]/20'}`}>
             <p className={`text-xl font-medium leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-              <strong>15+ years</strong> building workforce, hiring, and capability systems across financial institutions, government departments, and technology organisations in the UK and Nigeria.
+              <strong>7+ years</strong> building workforce, hiring, and capability systems across financial institutions, government departments, and technology organisations in the UK and Nigeria.
             </p>
           </div>
         </div>

@@ -51,7 +51,7 @@ export default function HomePage() {
               </span>
             </h1>
             <p className={`text-xl leading-relaxed mb-12 max-w-xl ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-              RAC closes that gap — through resourcing, education, and digital advisory that only comes from 15+ years on the inside.
+              RAC closes that gap — through resourcing, education, and digital advisory that only comes from 7+ years on the inside.
             </p>
             <div className="flex flex-col sm:flex-row gap-5">
               <a
